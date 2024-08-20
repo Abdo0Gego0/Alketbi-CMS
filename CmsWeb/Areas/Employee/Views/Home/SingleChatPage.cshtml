@@ -1,0 +1,192 @@
+﻿@page
+@using CmsWeb.Services.Chat;
+
+<link rel="stylesheet" href="~/public/nav/dash.css" />
+
+<style>
+
+    ::placeholder {
+    background: #FFF;
+    color: rgba(0, 0, 0, 0.65);
+    font-family: Arial;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 33px;
+    flex-shrink: 0;
+    padding:15px
+    }
+
+
+</style>
+
+
+@inject IChatService chatService
+
+@{
+    List<ChatMessages> mes = chatService.GetGroupsMessage(chatService.GetGroupId(ViewBag.GroupName));
+}
+
+<div class="chatTitle">
+    Clients Help
+</div>
+<br />
+<div class="container chatListContainer" style="width:80%">
+    <label class="chatName">Client: </label>
+    <input type="text" class="form-control" id="clientIdInput" disabled />
+    @*<input type="text" class="form-control" id="endMSG" hidden value="@Localizer["endMSG"]" />*@
+    <input type="text" class="form-control" id="endMSG" hidden value="Thank you for using Al Ketbi
+ Travel's chat service. If you
+ need further assistance, feel
+ free to ask. Have a great day!" />
+
+
+    <div class="row p-2 scrollMsg">
+
+
+                <div id="messagesList">
+
+                    @{
+                        foreach (var item in mes)
+                        {
+                            if(item.Sender==1)
+                            {
+                        <div class="classDestionation">@item.Message</div>
+
+
+
+                            }
+                            else
+                            {
+                        <div style="justify-content:end;display:flex">
+                            <div class="classSource">@item.Message</div>
+
+                        </div>
+                            }
+                        }
+                    }
+                </div>
+
+        <div class="row p-1">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+
+
+        <input type="text" class="w-100" id="clientIdInput" hidden />
+    </div>
+    <div class="row p-1" style="align-items:center">
+        <div class="col-7"><input type="text" class="w-100 msgText" id="messageInput" placeholder="Message" /></div>
+
+        <div class="col-2">
+
+            <button type="button" id="sendButton" class="sendBtn">
+                Send <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <div class="col-3">
+
+            <button type="button" id="sendButton" class="btn btn-danger " onclick="endConversatio()">
+                End Conversation
+            </button>
+        </div>
+    </div>
+
+
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chatSingle.js"></script>
+
+
+<script>
+
+
+    function endConversatio()
+    {
+
+        var chatName = $("#clientIdInput").val();
+
+
+
+        //alert(chatName);
+
+        sendEndMessage();
+
+        $.ajax(
+            {
+                type: 'POST',
+                //contentType: 'application/json; charset=utf-8',
+                url: '/Employee/Home/End_Conversation/?gId=' + chatName,
+                //data: { gId: chatName },
+                //dataType: 'json',
+                success: function (data) {
+                    //location.reload();
+                    //alert(data.msg);
+                    window.top.close();
+
+                },
+                error: function (xhr, status, error) {
+                    //location.reload();
+                    return false;
+                }
+            });
+
+
+    }
+
+</script>
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var currentUrl = window.location.href;
+
+        // Split the URL by "/"
+        var urlParts = currentUrl.split("/");
+
+        // Get the last part of the URL
+        var lastValue = urlParts[urlParts.length - 1];
+
+        var hiddenInput = document.getElementById("clientIdInput");
+
+
+
+        hiddenInput.value = lastValue;
+        var event = new Event('change');
+        hiddenInput.dispatchEvent(event);
+
+
+        var connection1 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        // Start the connection
+        connection1.start().then(function () {
+            // Invoke the hub method when the connection is established
+            connection1.invoke("AddToGroup", lastValue);
+        }).catch(function (err) {
+            console.error(err.toString());
+        });
+
+
+    });
+</script>
+

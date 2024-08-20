@@ -1,0 +1,142 @@
+﻿@page
+
+<style>
+
+.classSource
+{
+        direction: rtl;
+        background: #d9e2e7;
+        width: fit-content;
+        border-radius: 5px;
+        border-bottom-left-radius: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+
+    .classDestionation {
+        direction: ltr;
+        display: flex;
+        justify-content: flex-end;
+        background: #d9e2e7;
+        width: fit-content;
+        border-radius: 5px;
+        border-bottom-right-radius: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+
+
+
+</style>
+
+
+<div class="container chatListContainer">
+    <label class="badge bg-primary" style="font-size:20px">Client: </label>
+    <input type="text" class="form-control" id="clientIdInput" />
+
+
+<div class="row p-1">
+
+        <div class="row p-1">
+            <div class="col-6">
+                <ul id="messagesList">
+                </ul>
+            </div>
+        </div>
+            <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+
+
+        <input type="text" class="w-100" id="clientIdInput" hidden />
+    </div>
+    <div class="row p-1">
+        <div class="col-1">Message</div>
+        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6 text-end">
+
+            <button type="button" id="sendButton"  class="btn btn-primary">
+                Send <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="row p-1">
+        <div class="col-6 text-end">
+
+            <button type="button" id="sendButton" class="btn btn-danger">
+                End Conversation <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+ 
+
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chatSingle.js"></script>
+
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+                    var currentUrl = window.location.href;
+
+    // Split the URL by "/"
+    var urlParts = currentUrl.split("/");
+
+    // Get the last part of the URL
+    var lastValue = urlParts[urlParts.length - 1];
+
+        var hiddenInput = document.getElementById("clientIdInput");
+
+
+
+        hiddenInput.value = lastValue;
+        var event = new Event('change');
+        hiddenInput.dispatchEvent(event);
+
+        
+        var connection1 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    // Start the connection
+    connection1.start().then(function () {
+        // Invoke the hub method when the connection is established
+    connection1.invoke("AddToGroup", lastValue);
+    }).catch(function (err) {
+        console.error(err.toString());
+    });
+
+
+
+        
+
+    });
+</script>
+

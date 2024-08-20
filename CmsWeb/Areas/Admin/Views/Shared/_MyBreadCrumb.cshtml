@@ -1,0 +1,44 @@
+﻿
+
+    <script src="~/KendoUi/js/jquery.min.js"></script>
+    <script src="~/KendoUi/js/jszip.min.js"></script>
+    <script src="~/KendoUi/js/kendo.all.min.js"></script>
+    <script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+@inject INavService siteMapService
+
+@{
+    List<string> urls = siteMapService.GetSiteMap();
+    string caption = ViewBag.DispalyName == null ? urls[2] : ViewBag.DispalyName;
+    string PreviousAction = ViewBag.PreviousAction == null ? urls[1] : ViewBag.PreviousAction;
+}
+
+@*delimiter-icon="line"*@
+@*navigational="true"*@
+@*<div class="demo-section k-content wide">
+    <kendo-breadcrumb name="breadcrumb"
+                      navigational="true"
+                      editable="false">
+
+        <kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.RootItem" text="" href="https://demos.telerik.com/aspnet-core/" show-text="true" icon="home" show-icon="true"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="@urls[1]" href="/@urls[0]/@urls[1]"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="@caption" href="/@urls[0]/@urls[1]/@urls[2]"></kendo-breadcrumb-item>
+        </kendo-breadcrumb-items>
+    </kendo-breadcrumb>
+</div>*@
+
+
+<div class="demo-section k-content wide">
+    <kendo-breadcrumb name="breadcrumb"
+                      navigational="true"
+                      editable="false">
+
+        <kendo-breadcrumb-items>
+            <kendo-breadcrumb-item class="k-breadcrumb-last-item" type="BreadcrumbItemType.RootItem" text="" href="#" show-text="true" icon="home" show-icon="true"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item class="k-breadcrumb-last-item" type="BreadcrumbItemType.Item" text="@urls[1]" href="/@urls[0]/@urls[1]/@PreviousAction"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item class="k-breadcrumb-last-item" type="BreadcrumbItemType.Item" text="@caption" href="#"></kendo-breadcrumb-item>
+        </kendo-breadcrumb-items>
+    </kendo-breadcrumb>
+</div>

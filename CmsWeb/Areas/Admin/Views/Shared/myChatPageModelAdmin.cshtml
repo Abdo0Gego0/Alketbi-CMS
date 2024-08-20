@@ -1,0 +1,105 @@
+﻿@page
+
+<style>
+
+    .chatListContainer li
+    {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+</style>
+
+
+<div class="container chatListContainer">
+
+    <input type="text" class="w-100" id="clientIdInput" hidden />
+
+
+    <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList">
+            </ul>
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row p-1">
+        <div class="col-6">
+            <input type="button" class="form-control btn-primary" id="sendButton" value="Click on the Client name to Open Chat" />
+        </div>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chatAddGroup.js"></script>
+
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+
+             var connection1 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+            // Start the connection
+            connection1.start().then(function () {
+                // Invoke the hub method when the connection is established
+                connection1.invoke("getGroups", "System");
+            }).catch(function (err) {
+                console.error(err.toString());
+            });
+
+
+
+        // Check if the cookie exists
+        var existingClientId = getCookie("clientId");
+
+        if (!existingClientId) {
+            // Generate a new client ID
+            var newClientId = generateClientId();
+
+            // Set the cookie
+            setCookie("clientId", newClientId);
+
+            // Set the value to a hidden input
+            var hiddenInput = document.getElementById("clientIdInput");
+            if (hiddenInput) {
+                // Set the value attribute
+                hiddenInput.value = newClientId;
+
+                // Trigger the change event (if needed)
+                var event = new Event('change');
+                hiddenInput.dispatchEvent(event);
+            }
+        }
+        else{
+            var hiddenInput = document.getElementById("clientIdInput");
+            hiddenInput.value = existingClientId;
+        }
+
+        
+
+    });
+</script>
+

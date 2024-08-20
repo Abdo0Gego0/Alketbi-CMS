@@ -1,0 +1,244 @@
+﻿@{
+    string preferredCulture = ViewBag.PreferredCulture;
+
+}
+
+<link href="~/mnm/css/kednoedit.css" rel="stylesheet" />
+
+<script src="~/KendoUi/js/jquery.min.js"></script>
+<script src="~/KendoUi/js/jszip.min.js"></script>
+<script src="~/KendoUi/js/kendo.all.min.js"></script>
+<script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+
+<partial name="_DoctorsHorzBar" />
+
+
+
+
+
+
+
+@(
+Html.Kendo().Grid<DoctorSpeciality>()
+                                        .Name("grid")
+                                        .ToolBar
+                                        (
+     toolbar =>
+     {
+         toolbar.Create().HtmlAttributes(new { @class = "addCtrl" }).Text("Add New Specialty");
+     })
+
+                .Columns(columns =>
+                {
+
+
+                    columns.Bound(p => p.DoctorSpecialityTranslations[0].Description)
+                         .ClientTemplate("# if (DoctorSpecialityTranslations.length > 0) { #" +
+                             "#= DoctorSpecialityTranslations[0].Description #" +
+                             "# } else { #" +
+                             "''" +
+                         "# } #").Title("Speciality").Filterable(false);
+
+                    columns.Bound(p => p.DoctorSpecialityTranslations[1].Description)
+                        .ClientTemplate("# if (DoctorSpecialityTranslations.length > 0) { #" +
+                        "#= DoctorSpecialityTranslations[1].Description #" +
+                        "# } else { #" +
+                        "''" +
+                        "# } #").Title("التخصص").Filterable(false);
+
+
+
+
+
+                    columns.Command(command =>
+                    {
+                        command.Edit().TemplateId("Temp_Edit").UpdateText("Save");
+                        command.Destroy().TemplateId("Temp_Destroy");
+                    }).Width(250).Title("Actions");
+
+                }
+
+
+
+                )
+                .Mobile(MobileMode.Auto)
+                .Editable(
+                editable => editable.Mode(GridEditMode.PopUp).TemplateName("DoctorSpecialityEditor")
+                    .Window(
+                         w => w
+                        .Draggable()
+                        .Modal(true)
+                        .Title("Doctor Speciality Editor")
+                        .Resizable()
+                        .Animation(false)
+
+                    )
+                )
+
+                .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(25)
+                .Responsive(true)
+                .Info(true)
+                .Numeric(true)
+                )
+                .Sortable()
+                .Navigatable()
+                .Resizable(r => r.Columns(true))
+                .Reorderable(r => r.Columns(true))
+                .Filterable()
+                .Scrollable()
+
+
+                .HtmlAttributes(new { @class = "custom-grid" }) // Add a custom class
+
+                .DataSource(
+                    dataSource => dataSource
+
+                    .Ajax()
+@*.ServerOperation(false)*@
+.PageSize(20)
+                    .Model(model => model.Id(p => p.Id))
+                    .Model(model => model.Field(p => p.DoctorSpecialityTranslations).DefaultValue(new List<DoctorSpecialityTranslations>()
+
+                        {new DoctorSpecialityTranslations(),new DoctorSpecialityTranslations()}))
+                    .Read(read => read.Action("Read_Speciality", "Employees", new { preferredCulture }).Type(HttpVerbs.Get))
+                    .Create(update => update.Action("Create_Speciality", "Employees"))
+                    .Update(update => update.Action("Update_Speciality", "Employees"))
+                    .Destroy(destroy => destroy.Action("Destroy_Speciality", "Employees"))
+
+                .Events(events => events.Sync("sync_handler").RequestEnd("requestEnd").RequestStart("requestStart"))
+
+                )
+                .Events(events => events.Edit("onEdit"))
+                .Events(events => events.DataBound("onDataBound"))
+)
+
+
+
+
+
+
+
+<script>
+
+    function dirtyField(data, fieldName) {
+        if (data.dirty && data.dirtyFields[fieldName]) {
+            return "<span class='k-dirty'></span>"
+        }
+        else {
+            return "";
+        }
+    }
+
+
+    function sync_handler() {
+        this.read();
+    }
+
+    function requestEnd(e) {
+        if (e.type == "create") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+        if (e.type == "update") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+    }
+
+    function requestStart(e) {
+        if (e.type == "create") {
+
+        }
+    }
+
+
+
+    function onEdit(e) {
+
+
+        if (!e.model.isNew()) {
+            e.container.kendoWindow("title", "Edit");
+        }
+        else {
+
+            e.container.kendoWindow("title", "Add new");
+
+
+            var model = e.model;
+            var additionalLanguagesContainer = $("#additionalLanguagesContainer");
+            var addLanguageButton = $("#addLanguageButton");
+
+            addLanguageButton.click(function () {
+                // Create input elements for additional languages dynamically
+                var langCode = prompt("Enter Language Code (e.g., 'fr-FR'): ");
+                if (langCode) {
+                    // Check if a translation with the same language code already exists
+                    var existingTranslation = model.DoctorSpecialityTranslations.find(t => t.LangCode === langCode);
+                    if (existingTranslation) {
+                        alert("Language with the same code already exists.");
+                        return;
+                    }
+
+                    var langId = kendo.guid();
+                    var languageField =
+                        '<div class="k-edit-label">' +
+                        '<label for="additionalLanguageDescription">Description (' + langCode + ')</label>' +
+                        '</div>' +
+                        '<div class="k-edit-field">' +
+                        '<input type="text" class="k-input k-textbox" name="DoctorSpecialityTranslations[' + langId + '].Description" />' +
+                        '</div>';
+
+                    additionalLanguagesContainer.append(languageField);
+                }
+            });
+
+            //// Validation for mandatory Arabic and English descriptions
+            //model.bind("change", function (e) {
+            //    var arabicTranslation = model.ClinincSpecialityTranslations.find(t => t.LangCode === "ar");
+            //    var englishTranslation = model.ClinincSpecialityTranslations.find(t => t.LangCode === "en-US");
+
+            //    if (!arabicTranslation || !englishTranslation) {
+            //        e.preventDefault();
+            //        alert("Arabic and English translations are mandatory.");
+            //    }
+            //});
+        }
+    }
+
+    function returnFalse() {
+        return false;
+    }
+
+    function onDataBound(e) {
+        var grid = this;
+        grid.table.find("tr").each(function () {
+            var dataItem = grid.dataItem(this);
+
+            $(this).find('script').each(function () {
+                eval($(this).html());
+            });
+
+            kendo.bind($(this), dataItem);
+        });
+
+
+
+
+    }
+
+</script>
+
+<script id="Temp_Destroy" type="text/kendo-tmpl">
+    <span class="k-grid-delete" style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fa fa-trash"></i></span>
+</script>
+
+<script id="Temp_Edit" type="text/kendo-tmpl">
+    <span class="k-grid-edit"   style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fas fa-edit"></i></span>
+</script>

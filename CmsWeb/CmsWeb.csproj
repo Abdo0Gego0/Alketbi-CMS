@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <NoWarn>$(NoWarn);1591</NoWarn>
+
+
+  </PropertyGroup>
+
+  <ItemGroup>
+        <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.9" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
+        <PackageReference Include="QRCoder" Version="1.4.3" />
+        <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2022.3.913" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.0" />
+	    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.4.0" />
+	    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.4.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.4.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Templates\**" />
+    <Content Remove="Templates\**" />
+    <EmbeddedResource Remove="Templates\**" />
+    <None Remove="Templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Lang.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Employee\Views\Home\Index_old.cshtml" />
+    <Content Remove="Lang.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Auth\Data\" />
+    <Folder Include="Areas\Employee\Data\" />
+    <Folder Include="Areas\Employee\Models\" />
+    <Folder Include="Areas\Public\Data\" />
+    <Folder Include="Areas\Public\Models\" />
+    <Folder Include="wwwroot\microsoft\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Employees\CreateEmployee.cshtml" />
+    <None Include="Areas\Admin\Views\Employees\EditEmployee.cshtml" />
+    <None Include="Areas\Admin\Views\Employees\ListOfDoctorSpeciality.cshtml" />
+    <None Include="Areas\Admin\Views\Employees\ListOfEmployees.cshtml" />
+    <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Areas\Employee\Views\Home\Index_old.cshtml" />
+    <None Include="DesignFiles\Home\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CmsDataAccess\CmsDataAccess.csproj" />
+    <ProjectReference Include="..\CmsResources\CmsResources.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Employee\Views\Shared\_AdminHorzBar.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties UseCdnSupport="True" /></VisualStudio></ProjectExtensions>
+
+</Project>

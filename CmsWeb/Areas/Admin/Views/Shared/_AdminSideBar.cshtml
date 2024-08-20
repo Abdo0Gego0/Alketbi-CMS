@@ -1,0 +1,109 @@
+﻿@inject INavService StyleServiceMain
+
+<style>
+    .navItemActive {
+
+            color:#135051;
+            background-color: white;
+            float: right;
+            text-align: center;
+            width: 80%;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+
+    }
+</style>
+
+
+
+
+
+
+<nav id="sidebar">
+    <div class="pt-5">
+
+        <center>
+            <img src="~/public/images/logo.svg" style="max-width:100%" />
+        </center>
+@*        <a href="#" class="img logo rounded-circle mt-2 mb-2" style="border-style: double;border-color:black; background-image: url(/nb/images/logo.jpg);"></a>
+
+        <label class="AccountName">Mohammad M.</label>*@
+
+        <br />
+
+        <ul class="list-unstyled components mb-5">
+
+@*            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li>*@
+            <li class="@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Home"},new List<string>{"Index"},"active","")">
+                <a href="@Url.Action("Index","Home",new {area="Admin"})">
+
+
+                    
+                    <img style="width:24px;height:24px" src='~/nb/images/@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Home"},new List<string>{"Index"},"dashboard_w.svg","dashboard_g.svg")' />
+
+
+                    Dashborad
+
+                 </a>
+            </li>
+
+            <li class="@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Employees"},new List<string>{"ListOfDoctorSpeciality","ListOfDoctors","CreateDoctor","EditDoctor"
+                ,"ListOfEmployees","CreateEmployee","EditEmployee"},"active","")">
+                <a href="@Url.Action("ListOfEmployees","Employees",new {area="Admin"})">
+                    <img style="width:30px;height:35px" src='~/nb/images/@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Employees"},new List<string>{"ListOfDoctorSpeciality","ListOfDoctors","CreateDoctor","EditDoctor"
+                ,"ListOfEmployees","CreateEmployee","EditEmployee"},"employee_w.svg","employee_g.svg")' />
+                    Employees
+                </a>
+            
+            </li>
+
+            <li class="@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Home"},new List<string>{"LiveChatGroups","SingleChatPage","SingleChatPageHistory"},"active","")">
+                <a href="@Url.Action("LiveChatGroups","Home",new {area="Admin"})">
+                    <img style="width:24px;height:24px" src='~/nb/images/@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Home"},new List<string>{"LiveChatGroups","SingleChatPage","SingleChatPageHistory"},"ch_g.svg","ch_w.svg")' />
+                    Clients Help
+                 </a>
+            </li>
+
+
+
+
+
+
+@*            <li class="@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"SettingsIndex","LogInPolicyAction","BookingPolicyAction","NotificationPolicyAction"},"active","")">
+                <a href="@Url.Action("SettingsIndex","Settings",new {area="Admin"})">
+                    <img style="width:24px;height:24px" src='~/nb/images/@StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"SettingsIndex","LogInPolicyAction","BookingPolicyAction","NotificationPolicyAction"},"settings_g.png","settings_w.png")' />
+                    Settings
+                </a>
+            
+            </li>*@
+
+
+            <li>
+                <a href="@Url.Action("logOut","Login",new {area="Auth"})">
+                    <img style="width:24px;height:24px" src='~/nb/images/logOut.svg' />
+                    Logout
+                </a>
+            </li>
+
+
+        </ul>
+
+    </div>
+</nav>
+
+
+
+

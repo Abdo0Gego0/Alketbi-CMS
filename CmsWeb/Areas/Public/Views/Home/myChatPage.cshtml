@@ -1,0 +1,165 @@
+﻿@using CmsWeb.Services.Chat;
+
+<link rel="stylesheet" href="~/public/nav/chatpopup.css" />
+
+@inject IChatService chatService
+
+
+@{
+    string cookieValue = Context.Request.Cookies["clientId"];
+    List<ChatMessages> mes = new List<ChatMessages>();
+    try
+    {mes = chatService.GetGroupsMessage(chatService.GetGroupId(cookieValue));
+    }
+    catch
+    {
+        
+    }
+}
+
+
+
+<input type="text" class="w-100" id="clientIdInput" hidden />
+
+<div class="chat-container" id="ChatContainer">
+    <div class="container" style="padding:0px;">
+
+        <div class="chatHeader">
+            <div class="chatTitle">Live Chat</div>
+            <div class="closeButton" onclick="closeChat()">
+                <i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp; 
+            </div>
+        </div>
+
+        
+
+        <div class="messages overflow-auto">
+            <div id="messagesList">
+                <center>
+                    <div class="robotContainer">
+                        <div>
+                            <img src="~/public/images/robotIcon.svg" />
+                        </div>
+                        <div class="chatWelcome">
+                            @Localizer["chWlcmMsg"]
+                        </div>
+                    </div>
+
+
+
+                    <div id="msg1" class="chatWelcome" style="cursor:pointer" onclick="chooseService('msg1')">@Localizer["serv1Titl"]</div>
+                    <div id="msg2" class="chatWelcome" style="cursor:pointer" onclick="chooseService('msg2')">@Localizer["serv2Titl"]</div>
+                    <div id="msg3" class="chatWelcome" style="cursor:pointer" onclick="chooseService('msg3')">@Localizer["serv3Titl"]</div>
+                    <div id="msg4" class="chatWelcome" style="cursor:pointer" onclick="chooseService('msg4')">@Localizer["serv4Titl"]</div>
+                    <div id="msg5" class="chatWelcome" style="cursor:pointer" onclick="chooseService('msg5')">@Localizer["serv5Titl"]</div>
+
+                    
+
+                    @{
+                        if(mes.Count()>0)
+                        {
+                            @Html.Hidden("myVar", 1);
+                        }
+                        else
+                        {
+                            @Html.Hidden("myVar", 0);
+                        }
+                        foreach (var item in mes)
+                        {
+                            if (item.Sender == 2)
+                            {
+                                <div class="robotContainer">
+                                    <div>
+                                        <img src="~/public/images/robotIcon.svg" />
+                                    </div>
+                                    <div class="divDest">
+                                        <div class="classDestionation">@item.Message</div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="divSource">
+                                    <div class="classSource">@item.Message</div>
+
+                                </div>
+                            }
+                        }
+                    }
+
+                    
+                    
+                    
+                </center>
+            </div>
+        </div>
+
+    <div class="send-section">
+            <input type="text" class="input-message" id="messageInput" placeholder="@Localizer["typeText"]">
+            <a class="ms-3" id="sendButton" href="#!" style="color:#2D3D4D;"><i class="fas fa-paper-plane"></i></a>&nbsp;&nbsp;
+    </div>
+
+    </div>
+</div>
+
+
+<script>
+    function setMyValue() {
+        ableTosend = parseInt($('#myVar').val());
+        
+    }
+</script>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the cookie exists
+        var existingClientId = getCookie("clientId");
+
+        if (!existingClientId) {
+            // Generate a new client ID
+            var newClientId = generateClientId();
+
+            // Set the cookie
+            setCookie("clientId", newClientId);
+
+            // Set the value to a hidden input
+            var hiddenInput = document.getElementById("clientIdInput");
+            if (hiddenInput) {
+                // Set the value attribute
+                hiddenInput.value = newClientId;
+
+                // Trigger the change event (if needed)
+                var event = new Event('change');
+                hiddenInput.dispatchEvent(event);
+            }
+        }
+        else {
+            var hiddenInput = document.getElementById("clientIdInput");
+            hiddenInput.value = existingClientId;
+        }
+
+    });
+</script>
+
+

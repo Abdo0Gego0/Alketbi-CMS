@@ -1,0 +1,162 @@
+﻿
+.k-grid-myEdit {
+    border: none !important;
+    background: none !important;
+}
+
+
+
+
+
+.k-grid-edit {
+    font-size: 14px !important;
+    background: #91a4b0 !important;
+    color: white !important;
+}
+
+.prof-photo {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-size: 32px 35px;
+    background-position: center center;
+    vertical-align: middle;
+    line-height: 32px;
+    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+    margin-right: 5px;
+}
+
+.picCircle {
+    background-size: contain;
+    /*	border: 1px solid var(--darkGreen);
+	border-radius: 50%;*/
+    margin-top: 5px;
+    display: inline-flex;
+    background-repeat: no-repeat;
+    height: 256px;
+    width: 256px;
+    padding: 0 10px;
+    background-image: url('../icons/uploadImage.svg')
+}
+
+.k-breadcrumb-item {
+    vertical-align: middle;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+
+
+.addCtrl {
+    font-size: 16px !important;
+    color: #000 !important;
+    margin-bottom: 25px !important;
+    border-radius: 29px !important;
+    background: rgba(181, 195, 203, 0.75) !important;
+}
+
+.k-grid-update {
+    background: rgba(1, 81, 83, 1) !important;
+}
+
+.custom-grid {
+    height: 550px;
+    width: 100%;
+    /*box-shadow: 6px 6px 6px 6px rgba(19, 80, 81, 0.50) !important;*/
+}
+
+
+
+    .custom-grid .k-header {
+        color: #000;
+        text-align: center;
+        font-family: 'Inter';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        border-bottom: 2px solid black;
+    }
+
+    .custom-grid .k-grid-header {
+        background: #F2F3F8;
+    }
+
+
+    .custom-grid .k-auto-scrollable {
+        background: #F2F3F8;
+    }
+
+    .custom-grid .k-grid-pager {
+        background: #F2F3F8;
+    }
+
+
+
+    .custom-grid th {
+    }
+
+
+    .custom-grid .k-grid-content tr {
+        text-align: center;
+        font-size: 14px;
+        /*font-weight:bold;*/
+    }
+
+    .custom-grid thead {
+        background: #F2F3F8;
+    }
+
+
+    .custom-grid .k-toolbar {
+        background: #F2F3F8;
+        border: none;
+    }
+
+
+
+    .custom-grid .k-grid-content {
+        background: #F2F3F8;
+    }
+
+.k-searchbox {
+    margin-bottom: 25px !important;
+    border-radius: 29px !important;
+    font-size: 16px;
+}
+
+
+.k-link {
+    justify-content: center;
+}
+
+
+
+
+.k-grid tbody td:first-child {
+    /*border-left: solid red;*/
+}
+
+.k-grid tbody td:last-child {
+    /*border-right: solid red;*/
+}
+
+.k-grid tbody td {
+    /*border-top: solid red;*/
+    border-bottom: 1px solid black;
+}
+
+.k-grid-update {
+    border-color: #91a4b0 !important;
+    background: #91a4b0 !important;
+    color:white;
+}

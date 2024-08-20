@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About Us" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="AboutUsContent" xml:space="preserve">
+    <value>The company was founded in 1994 by a group of highly competent &amp; experienced professionals in the Travel and Tourism domain. Since its inception, Al Ketbi Travel has consistently delivered top quality services that are meeting/exceeding customer expectations.
+
+In the light of the above, Al Ketbi Travel had broadened its array of services to comprise 6 main areas: Reservations, Ticketing, Tour Packages, Travel Insurance, Hotel Booking, Desert Safari and Dhow Cruise.</value>
+  </data>
+  <data name="Access special offers and unique experiences." xml:space="preserve">
+    <value>Access special offers and unique experiences.</value>
+  </data>
+  <data name="adddress" xml:space="preserve">
+    <value>Abu Dhabi, Al Bateen W-10, Al Faskar Street, Al Khalidiya Tower, Minzaanin Floor</value>
+  </data>
+  <data name="Always Available" xml:space="preserve">
+    <value>Always Available</value>
+  </data>
+  <data name="BC1" xml:space="preserve">
+    <value>Bookings are subject to availability and confirmation. Al Ketbi Travel reserves the right to cancel or modify bookings that violate
+      our terms.</value>
+  </data>
+  <data name="Booking and Service Policies" xml:space="preserve">
+    <value>Booking and Service Policies</value>
+  </data>
+  <data name="Booking Conditions:" xml:space="preserve">
+    <value>Booking Conditions:</value>
+  </data>
+  <data name="Booking Process:" xml:space="preserve">
+    <value>Booking Process:</value>
+  </data>
+  <data name="BP1" xml:space="preserve">
+    <value>Users can book services through our website by following the provided instructions. Bookings are subject to availability and confirmation.</value>
+  </data>
+  <data name="BP2" xml:space="preserve">
+    <value>Users are responsible for understanding and agreeing to any specific conditions associated with booked services. Any additional requirements will be communicated during the booking process.</value>
+  </data>
+  <data name="Business Philosophy:" xml:space="preserve">
+    <value>Business Philosophy:</value>
+  </data>
+  <data name="BusinessContent" xml:space="preserve">
+    <value>To strive for worldwide excellence in its travel and tourism business practices, following a three-pronged approach:
+
+Foster a focused, proactive, professional and innovative environment in the organization and to enhance owners value and customer satisfaction.
+
+Empower the local and regional travel and tourism fraternity with business intelligence to facilitate informed decision making and gain operational efficiency through its enterprise products, services and solutions.
+
+Expand vertically and horizontally by adopting best business practices.</value>
+  </data>
+  <data name="CC" xml:space="preserve">
+    <value>© 2023 Al Ketbi Travels Company. All rights reserved</value>
+  </data>
+  <data name="chWlcmMsg" xml:space="preserve">
+    <value>Welcome to Al Ketbi Travel website. How can we help you?</value>
+  </data>
+  <data name="ci" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="company" xml:space="preserve">
+    <value>Al Ketbi Travels Company. All rights reserved</value>
+  </data>
+  <data name="compName" xml:space="preserve">
+    <value>Al Ketbi Travels</value>
+  </data>
+  <data name="Contact Information" xml:space="preserve">
+    <value>For any inquiries or concerns regarding our services or policies, please contactus at:</value>
+  </data>
+  <data name="Customized for You" xml:space="preserve">
+    <value>Customized for You</value>
+  </data>
+  <data name="Department of the Presidential Affairs" xml:space="preserve">
+    <value>Department of the Presidential Affairs</value>
+  </data>
+  <data name="dir" xml:space="preserve">
+    <value>ltr</value>
+  </data>
+  <data name="Email:" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Emirates Falconers' Club (EFC)" xml:space="preserve">
+    <value>Emirates Falconers' Club (EFC)</value>
+  </data>
+  <data name="endMSG" xml:space="preserve">
+    <value>Thank you for using Al Ketbi
+ Travel's chat service. If you
+ need further assistance, feel
+ free to ask. Have a great day!</value>
+  </data>
+  <data name="Exclusive Deals" xml:space="preserve">
+    <value>Exclusive Deals</value>
+  </data>
+  <data name="Expertise Since 1994" xml:space="preserve">
+    <value>Expertise Since 1994</value>
+  </data>
+  <data name="Get support anytime during your trip 24/7." xml:space="preserve">
+    <value>Get support anytime during your trip 24/7.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IATA Groups" xml:space="preserve">
+    <value>IATA Groups</value>
+  </data>
+  <data name="Information Collection:" xml:space="preserve">
+    <value>Information Collection:</value>
+  </data>
+  <data name="International Fund for Houbara Conservation (IFHC)" xml:space="preserve">
+    <value>International Fund for Houbara Conservation (IFHC)</value>
+  </data>
+  <data name="langImage" xml:space="preserve">
+    <value>arLang.svg</value>
+  </data>
+  <data name="langUrl" xml:space="preserve">
+    <value>/Lang?culture=ar</value>
+  </data>
+  <data name="mail" xml:space="preserve">
+    <value>info@alketbitravelofficial.ae</value>
+  </data>
+  <data name="Ministry of Presidential Affairs" xml:space="preserve">
+    <value>Ministry of Presidential Affairs</value>
+  </data>
+  <data name="Mohamed Bin Zayed RaptoR FUNDS" xml:space="preserve">
+    <value>Mohamed Bin Zayed RaptoR FUNDS</value>
+  </data>
+  <data name="NAJAHI Events" xml:space="preserve">
+    <value>NAJAHI Events</value>
+  </data>
+  <data name="Name:" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="National Search and Rescue Center | UAE" xml:space="preserve">
+    <value>National Search and Rescue Center | UAE</value>
+  </data>
+  <data name="Observations:" xml:space="preserve">
+    <value>Observations:</value>
+  </data>
+  <data name="Our experienced team makes travel planning easy." xml:space="preserve">
+    <value>Our experienced team makes travel planning easy.</value>
+  </data>
+  <data name="Over 29 years creating unforgettable trips." xml:space="preserve">
+    <value>Over 29 years creating unforgettable trips.</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>Partners</value>
+  </data>
+  <data name="Personalized travel plans to match your preferences." xml:space="preserve">
+    <value>Personalized travel plans to match your preferences.</value>
+  </data>
+  <data name="Phone:" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="PP1" xml:space="preserve">
+    <value>We may collect personal identification information from users in various ways, including, but not limited to, when users visit our site, register on the site, and place bookings.</value>
+  </data>
+  <data name="PP2" xml:space="preserve">
+    <value>Any information provided by users will be used for the purpose of booking and improving our services. We do not share this information with third parties.</value>
+  </data>
+  <data name="PPContent" xml:space="preserve">
+    <value>Your privacy is important to us. This privacy policy outlines how Al Ketbi Travel collects, uses, maintains, and discloses information collected from users.</value>
+  </data>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Prohibited Activities:" xml:space="preserve">
+    <value>Prohibited Activities:</value>
+  </data>
+  <data name="Quality Assured" xml:space="preserve">
+    <value>Quality Assured</value>
+  </data>
+  <data name="Sent" xml:space="preserve">
+    <value>Submitted successfully.</value>
+  </data>
+  <data name="serv1Cont" xml:space="preserve">
+    <value>Special promotion
+                    and high value
+                    services with major
+                    Airlines operating
+                    from UAE to all over
+                    the world.</value>
+  </data>
+  <data name="serv1Titl" xml:space="preserve">
+    <value>Airline
+                    Reservations</value>
+  </data>
+  <data name="serv2Cont" xml:space="preserve">
+    <value>We can provide 4 star
+/5 star hotels or
+Apartment with
+specially designed
+amenities.</value>
+  </data>
+  <data name="serv2Titl" xml:space="preserve">
+    <value>Hotel / Apartment
+                        Reservations</value>
+  </data>
+  <data name="serv3Cont" xml:space="preserve">
+    <value>Tailor made tour
+packages with 5*
+deluxe hotels and
+private transfers.</value>
+  </data>
+  <data name="serv3Titl" xml:space="preserve">
+    <value>Luxury Travel
+                    services</value>
+  </data>
+  <data name="serv4Cont" xml:space="preserve">
+    <value>Specially designed
+                    honeymoon
+                    packages
+                    with exotic
+                    destinations.</value>
+  </data>
+  <data name="serv4Titl" xml:space="preserve">
+    <value>Honeymoon
+                    packages</value>
+  </data>
+  <data name="serv5Cont" xml:space="preserve">
+    <value>We provide holiday
+                    packages with unique
+                    services For the
+                    Individual and
+                    Group bookings.</value>
+  </data>
+  <data name="serv5Titl" xml:space="preserve">
+    <value>Tour Packages</value>
+  </data>
+  <data name="Service Conditions:" xml:space="preserve">
+    <value>Service Conditions:</value>
+  </data>
+  <data name="Service Description:" xml:space="preserve">
+    <value>Service Description:</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="srvc1" xml:space="preserve">
+    <value>Al Ketbi Travel provides information about travel services based in Abu Dhabi, UAE. We offer booking services for various travel experiences within the region.</value>
+  </data>
+  <data name="srvc2" xml:space="preserve">
+    <value>Users are responsible for providing accurate information during the booking process. Al Ketbi Travel reserves the right to refuse servic e to anyone for any reason at any time.</value>
+  </data>
+  <data name="srvc3" xml:space="preserve">
+    <value>Bookings are subject to availability and confirmation. Al Ketbi Travel reserves the right to cancel or modify bookings that violate our terms.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Terms of Service (TOS):" xml:space="preserve">
+    <value>Terms of Service (TOS):</value>
+  </data>
+  <data name="Terms of Servicess" xml:space="preserve">
+    <value>Terms of Services</value>
+  </data>
+  <data name="ThanksMSG" xml:space="preserve">
+    <value>Thank you, will be contacted soon.</value>
+  </data>
+  <data name="TOSContent" xml:space="preserve">
+    <value>Welcome to Al Ketbi Travel! By accessing and using our website, you agree to comply with and be bound by the following terms and conditions of use. Please read these terms carefully before using our services.</value>
+  </data>
+  <data name="Trusted Guidance" xml:space="preserve">
+    <value>Trusted Guidance</value>
+  </data>
+  <data name="typeText" xml:space="preserve">
+    <value>Type your message...</value>
+  </data>
+  <data name="UAE Independent Climate Change Accelerators (UICCA)" xml:space="preserve">
+    <value>UAE Independent Climate Change Accelerators (UICCA)</value>
+  </data>
+  <data name="Updates to Policies" xml:space="preserve">
+    <value>Updates to Policies</value>
+  </data>
+  <data name="Use of Information:" xml:space="preserve">
+    <value>Use of Information:</value>
+  </data>
+  <data name="User Conduct and Responsibilities" xml:space="preserve">
+    <value>User Conduct and Responsibilities</value>
+  </data>
+  <data name="User Responsibilities:" xml:space="preserve">
+    <value>User Responsibilities:</value>
+  </data>
+  <data name="UTP" xml:space="preserve">
+    <value>We reserve the right to update these policies at any time. Users will be notified of any changes on our website.</value>
+  </data>
+  <data name="UUR1" xml:space="preserve">
+    <value>Users are prohibited from engaging in any unlawful activities on our website. Any violation of these terms may result in the termination of services.</value>
+  </data>
+  <data name="We ensure top-notch experiences for every traveler." xml:space="preserve">
+    <value>We ensure top-notch experiences for every traveler.</value>
+  </data>
+  <data name="What you are looking for?" xml:space="preserve">
+    <value>What you are looking for?</value>
+  </data>
+  <data name="Why choose us?" xml:space="preserve">
+    <value>Why choose us?</value>
+  </data>
+  <data name="YAS HOLDING" xml:space="preserve">
+    <value>YAS HOLDING</value>
+  </data>
+</root>

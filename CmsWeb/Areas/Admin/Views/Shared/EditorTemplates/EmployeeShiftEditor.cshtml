@@ -1,0 +1,69 @@
+﻿@using CmsDataAccess;
+
+@inject ApplicationDbContext  cmsContext;
+
+@{
+
+
+    List<ShiftTable> shiftTables = cmsContext.ShiftTable.ToList();
+
+}
+
+
+
+<div style="width:100%">
+<div class="container">
+
+    <h2 class="bg-info p-1 text-white">Add shift for this employee</h2>
+    <table class="table table-bordered table-striped  table-hover" id="userTableAdd">
+
+            <thead>
+                <tr>
+                    <th>Shift name</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="nest">
+
+
+
+            </tbody>
+
+
+
+
+
+    </table>
+
+
+        <h2 class="bg-info p-1 text-white">Remove shift for this employee</h2>
+    <table class="table table-bordered table-striped  table-hover" id="userTableAdd">
+
+            <thead>
+                <tr>
+                    <th>Shift name</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="est">
+
+
+
+            </tbody>
+
+
+
+
+
+    </table>
+
+
+
+</div>
+</div>
+
+

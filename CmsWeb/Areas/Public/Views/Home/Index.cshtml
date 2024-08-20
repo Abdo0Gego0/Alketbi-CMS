@@ -1,0 +1,88 @@
+﻿@*@{
+    var clientId = Context.Request.Cookies["ClientId"];
+
+    if (string.IsNullOrEmpty(clientId))
+    {
+        // Generate a new client ID if it doesn't exist in the cookie
+        clientId = Guid.NewGuid().ToString()+DateTime.Now.Ticks.ToString();
+        clientId = clientId.Replace("-","");
+
+        // Set the client ID in a cookie with a 100-year expiration
+        Context.Response.Cookies.Append("ClientId", clientId, new CookieOptions
+                {
+                    Expires = DateTime.UtcNow.AddYears(100)
+                });
+    }
+}*@
+
+
+
+<link rel="stylesheet" href="~/public/nav/home.css" />
+
+<partial name="_PublicNavBar" style="padding-bottom:65px"/>
+
+
+<div class="bg-image">
+
+    
+</div>
+
+<div class="flying-plane"></div>
+
+<div class="date-now-container">
+    <div class="date-now-wrapper">
+        <img src="~/public/images/dateNow.svg" alt="current date" class="date-now" />
+        <label id="current-date-time" class="date-time-label"></label>
+    </div>
+</div>
+
+<!-- WhatsApp Icon -->
+<div class="whatsapp-container">
+    <a href="https://wa.me/+971558797218" target="_blank">
+        <img src="~/public/images/whatsapp.svg" alt="WhatsApp" class="whatsapp-icon" />
+    </a>
+</div>
+<partial name="_HomeSecondSection" style="display:flex"/>
+
+@*<partial name="_HomeThirdSection" style="display:flex" />
+
+<br />
+
+<partial name="_HomeForthSection" style="display:flex" />
+
+<partial name="_HomeFifthSection" style="display:flex" />*@
+
+
+<partial name="_Footer" style="display:flex" />
+
+<partial name="myChatPage" style="display:flex" />
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to update the date and time every second
+        function updateDateTime() {
+            // Get the current date and time
+            const now = new Date();
+
+            // Format the date
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', dateOptions);
+
+            // Format the time
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const formattedTime = now.toLocaleTimeString('en-US', timeOptions);
+
+            // Combine date and time
+            const dateTime = `${formattedDate} ${formattedTime}`;
+
+            // Display the formatted date and time in the label
+            document.getElementById("current-date-time").innerText = dateTime;
+        }
+
+        // Initial call to set the date and time immediately
+        updateDateTime();
+
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+    });
+</script>

@@ -1,0 +1,39 @@
+﻿@inject INavService StyleServiceMain
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item  @StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"SettingsIndex"},"active","")">
+                    <a class="nav-link" href="@Url.Action("SettingsIndex","Settings",new {area="Admin"})">Center Info</a>
+                </li>
+
+                <li class="nav-item  @StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"LogInPolicyAction"},"active","")">
+                    <a class="nav-link" href="@Url.Action("LogInPolicyAction","Settings",new {area="Admin"})">Login Policy</a>
+                </li>
+
+                                <li class="nav-item  @StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"BookingPolicyAction"},"active","")">
+                    <a class="nav-link" href="@Url.Action("BookingPolicyAction","Settings",new {area="Admin"})">Booking Policy</a>
+                </li>
+
+                <li class="nav-item  @StyleServiceMain.GetStylGetStyleMainNav(new List<string>{"Settings"},new List<string>{"NotificationPolicyAction"},"active","")">
+                    <a class="nav-link" href="@Url.Action("NotificationPolicyAction","Settings",new {area="Admin"})">Notification Policy</a>
+                </li>
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About Us" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="AboutUsContent" xml:space="preserve">
+    <value>تأسست الشركة في عام 1994 على يد مجموعة من المهنيين ذوي الكفاءة والخبرة العالية في مجال السفر والسياحة. منذ إنشائها، قدمت الكتبي للسفريات باستمرار خدمات عالية الجودة تلبي/تتجاوز توقعات العملاء.
+
+في ضوء ما سبق، قامت الكتبي للسفريات بتوسيع مجموعة خدماتها لتشمل 6 مجالات رئيسية: الحجوزات، إصدار التذاكر، البرامج السياحية، تأمين السفر، حجز الفنادق، رحلات السفاري الصحراوية ورحلات الداو البحرية.</value>
+  </data>
+  <data name="Access special offers and unique experiences." xml:space="preserve">
+    <value>الحصول على عروض خاصة وتجربة فريدة.</value>
+  </data>
+  <data name="adddress" xml:space="preserve">
+    <value>أبوظبي، البطين W-10 ، مبنى الخالدية، شارع الفسكر، طابق الميزانين</value>
+  </data>
+  <data name="Always Available" xml:space="preserve">
+    <value>متوفر دائما.</value>
+  </data>
+  <data name="BC1" xml:space="preserve">
+    <value>تخضع الحجوزات للتوفر والتأكيد. تحتفظ الكتبي للسفريات بالحق في إلغاء أو تعديل الحجوزات التي تنتهك شروطنا.</value>
+  </data>
+  <data name="Booking and Service Policies" xml:space="preserve">
+    <value>سياسة الحجز والحصول على الخدمات</value>
+  </data>
+  <data name="Booking Conditions:" xml:space="preserve">
+    <value>شروط الحجز:</value>
+  </data>
+  <data name="Booking Process:" xml:space="preserve">
+    <value>آلية الحجز:</value>
+  </data>
+  <data name="BP1" xml:space="preserve">
+    <value>يمكن للمستخدمين حجز الخدمات عبر موقعنا الإلكتروني باتباع التعليمات المقدمة. تخضع الحجوزات للتوفر والتأكيد.</value>
+  </data>
+  <data name="BP2" xml:space="preserve">
+    <value>يتحمل المستخدمون مسؤولية فهم أي شروط محددة مرتبطة بالخدمات المحجوزة والموافقة عليها. سيتم الإبلاغ عن أي متطلبات إضافية أثناء عملية الحجز.</value>
+  </data>
+  <data name="Business Philosophy:" xml:space="preserve">
+    <value>فلسفة العمل:</value>
+  </data>
+  <data name="BusinessContent" xml:space="preserve">
+    <value>السعي لتحقيق التميز العالمي في ممارسات أعمال السفر والسياحة، وذلك باتباع نهج ثلاثي المحاور:
+
+تعزيز بيئة مركزة واستباقية ومهنية ومبتكرة في المنظمة وتعزيز قيمة المالكين ورضا العملاء.
+
+تمكين شركات السفر والسياحة المحلية والإقليمية من خلال ذكاء الأعمال لتسهيل اتخاذ القرارات المستنيرة واكتساب الكفاءة التشغيلية من خلال منتجاتها وخدماتها وحلولها.
+
+التوسع رأسياً وأفقياً من خلال اعتماد أفضل الممارسات التجارية.</value>
+  </data>
+  <data name="CC" xml:space="preserve">
+    <value>© 2023 Al Ketbi Travels Company. All rights reserved</value>
+  </data>
+  <data name="chWlcmMsg" xml:space="preserve">
+    <value>أهلا بك في موقع الكتبي للسفريات بماذا يمكننا أن نساعدك؟</value>
+  </data>
+  <data name="ci" xml:space="preserve">
+    <value>معلومات الاتصال</value>
+  </data>
+  <data name="company" xml:space="preserve">
+    <value>الكتبي للسفريات. جميع الحقوق محفوظة.</value>
+  </data>
+  <data name="compName" xml:space="preserve">
+    <value>الكتبي للسفريات</value>
+  </data>
+  <data name="Contact Information" xml:space="preserve">
+    <value>لأية أسئلة أو استفسارات بخصوص خدماتنا أو سياساتنا، يرجى الاتصال بنا على:</value>
+  </data>
+  <data name="Customized for You" xml:space="preserve">
+    <value>خصيصا لك</value>
+  </data>
+  <data name="Department of the Presidential Affairs" xml:space="preserve">
+    <value>قسم شؤون الرئاسة</value>
+  </data>
+  <data name="dir" xml:space="preserve">
+    <value>rtl</value>
+  </data>
+  <data name="Email:" xml:space="preserve">
+    <value>الإيميل:</value>
+  </data>
+  <data name="Emirates Falconers' Club (EFC)" xml:space="preserve">
+    <value>نادي صقور الإمارات (EFC)</value>
+  </data>
+  <data name="endMSG" xml:space="preserve">
+    <value>شكرًا لاستخدامك خدمة الدردشة الخاصة بالكتبي للسفريات. إذا كنت بحاجة إلى مساعدة إضافية، لا تتردد في السؤال. أتمنى لك يومًا رائعًا!</value>
+  </data>
+  <data name="Exclusive Deals" xml:space="preserve">
+    <value>عروض حصرية</value>
+  </data>
+  <data name="Expertise Since 1994" xml:space="preserve">
+    <value>خبرتنا منذ عام 1994</value>
+  </data>
+  <data name="Get support anytime during your trip 24/7." xml:space="preserve">
+    <value>احصل على الدعم في أي وقت خلال رحلتك على مدار 24 ساعة طوال أيام الأسبوع.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="IATA Groups" xml:space="preserve">
+    <value>مجموعات اتحاد النقل الجوي الدولي</value>
+  </data>
+  <data name="Information Collection:" xml:space="preserve">
+    <value>جمع المعلومات:</value>
+  </data>
+  <data name="International Fund for Houbara Conservation (IFHC)" xml:space="preserve">
+    <value>الصندوق الدولي للحفاظ على الحبارى (IFHC)</value>
+  </data>
+  <data name="langImage" xml:space="preserve">
+    <value>usa.svg</value>
+  </data>
+  <data name="langUrl" xml:space="preserve">
+    <value>/Lang?culture=en-US</value>
+  </data>
+  <data name="mail" xml:space="preserve">
+    <value>info@alketbitravelofficial.ae</value>
+  </data>
+  <data name="Ministry of Presidential Affairs" xml:space="preserve">
+    <value>وزارة شؤون الرئاسة</value>
+  </data>
+  <data name="Mohamed Bin Zayed RaptoR FUNDS" xml:space="preserve">
+    <value>صندوق محمد بن زايد RaptoR FUNDS</value>
+  </data>
+  <data name="NAJAHI Events" xml:space="preserve">
+    <value>فعاليات نجاحي</value>
+  </data>
+  <data name="Name:" xml:space="preserve">
+    <value>الاسم:</value>
+  </data>
+  <data name="National Search and Rescue Center | UAE" xml:space="preserve">
+    <value>المركز الوطني للبحث والإنقاذ | الإمارات العربية المتحدة</value>
+  </data>
+  <data name="Observations:" xml:space="preserve">
+    <value>الملاحظات:</value>
+  </data>
+  <data name="Our experienced team makes travel planning easy." xml:space="preserve">
+    <value>فريقنا ذو الخبرة يجعل التخطيط للسفر سهلاً.</value>
+  </data>
+  <data name="Over 29 years creating unforgettable trips." xml:space="preserve">
+    <value>29 سنة خبرة في مجال الرحلات غير قابلة للنسيان</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>شركاؤنا</value>
+  </data>
+  <data name="Personalized travel plans to match your preferences." xml:space="preserve">
+    <value>تخطيط الرحلات لتناسب احتياجاتك</value>
+  </data>
+  <data name="Phone:" xml:space="preserve">
+    <value>الهاتف:</value>
+  </data>
+  <data name="PP1" xml:space="preserve">
+    <value>قد نقوم بجمع معلومات التعريف الشخصية من المستخدمين بطرق مختلفة، بما في ذلك، على سبيل المثال لا الحصر، عندما يزور المستخدمون موقعنا، ويقومون بالتسجيل في الموقع، وإجراء الحجوزات.</value>
+  </data>
+  <data name="PP2" xml:space="preserve">
+    <value>سيتم استخدام أي معلومات يقدمها المستخدمون لغرض الحجز وتحسين خدماتنا. نحن لا نشارك هذه المعلومات مع أطراف ثالثة.</value>
+  </data>
+  <data name="PPContent" xml:space="preserve">
+    <value>خصوصيتك مهمة بالنسبة لنا. توضح سياسة الخصوصية هذه كيفية جمع الكتبي للسفريات واستخدامها والحفاظ عليها والكشف عن المعلومات التي تم جمعها من المستخدمين.</value>
+  </data>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="Prohibited Activities:" xml:space="preserve">
+    <value>الأنشطة المحظورة:</value>
+  </data>
+  <data name="Quality Assured" xml:space="preserve">
+    <value>ضمان الجودة</value>
+  </data>
+  <data name="Sent" xml:space="preserve">
+    <value>تم الإرسال بنجاح.</value>
+  </data>
+  <data name="serv1Cont" xml:space="preserve">
+    <value>عروض ترويجية خاصة وخدمات عالية القيمة مع شركات الطيران الكبرى العاملة من دولة الإمارات العربية المتحدة إلى جميع أنحاء العالم.</value>
+  </data>
+  <data name="serv1Titl" xml:space="preserve">
+    <value>حجوزات طيران</value>
+  </data>
+  <data name="serv2Cont" xml:space="preserve">
+    <value>يمكننا توفير فنادق أو شقق من فئة 4 نجوم/5 نجوم مع وسائل الراحة المصممة خصيصًا.</value>
+  </data>
+  <data name="serv2Titl" xml:space="preserve">
+    <value>حجوزات الفنادق/الشقق</value>
+  </data>
+  <data name="serv3Cont" xml:space="preserve">
+    <value>عروض سياحية مصممة خصيصًا مع فنادق 5 نجوم فاخرة ووسائل النقل الخاصة.</value>
+  </data>
+  <data name="serv3Titl" xml:space="preserve">
+    <value>خدمات السفر الفاخرة</value>
+  </data>
+  <data name="serv4Cont" xml:space="preserve">
+    <value>باقات شهر العسل المصممة خصيصًا مع وجهات غريبة.</value>
+  </data>
+  <data name="serv4Titl" xml:space="preserve">
+    <value>باقات شهر العسل</value>
+  </data>
+  <data name="serv5Cont" xml:space="preserve">
+    <value>نحن نقدم باقات العطلات مع خدمات فريدة للحجوزات الفردية والجماعية.</value>
+  </data>
+  <data name="serv5Titl" xml:space="preserve">
+    <value>برامج سياحية</value>
+  </data>
+  <data name="Service Conditions:" xml:space="preserve">
+    <value>شروط الخدمة:</value>
+  </data>
+  <data name="Service Description:" xml:space="preserve">
+    <value>مواصفات الخدمة:</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+  <data name="srvc1" xml:space="preserve">
+    <value>توفر الكتبي للسفريات معلومات حول خدمات السفر التي يقع مقرها في أبو ظبي، الإمارات العربية المتحدة. نحن نقدم خدمات الحجز لمختلف تجارب السفر داخل المنطقة.</value>
+  </data>
+  <data name="srvc2" xml:space="preserve">
+    <value>يتحمل المستخدمون مسؤولية تقديم معلومات دقيقة أثناء عملية الحجز. تحتفظ الكتبي للسفريات بالحق في رفض الخدمة لأي شخص لأي سبب في أي وقت.</value>
+  </data>
+  <data name="srvc3" xml:space="preserve">
+    <value>تخضع الحجوزات للتوفر والتأكيد. تحتفظ الكتبي للسفريات بالحق في إلغاء أو تعديل الحجوزات التي تنتهك شروطنا.</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>السعي لتحقيق التميز العالمي في ممارسات أعمال السفر والسياحة، وذلك باتباع نهج ثلاثي المحاور:</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>تعزيز بيئة مركزة واستباقية ومهنية ومبتكرة في المنظمة وتعزيز قيمة المالكين ورضا العملاء.</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>تمكين شركات السفر والسياحة المحلية والإقليمية من خلال ذكاء الأعمال لتسهيل اتخاذ القرارات المستنيرة واكتساب الكفاءة التشغيلية من خلال منتجاتها وخدماتها وحلولها.</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>التوسع رأسياً وأفقياً من خلال اعتماد أفضل الممارسات التجارية.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
+  <data name="Terms of Service (TOS):" xml:space="preserve">
+    <value>شروط الخدمة (TOS):</value>
+  </data>
+  <data name="Terms of Servicess" xml:space="preserve">
+    <value>شروط الخدمة</value>
+  </data>
+  <data name="ThanksMSG" xml:space="preserve">
+    <value>شكرا لك، سيتم التواصل معك قريباً.</value>
+  </data>
+  <data name="TOSContent" xml:space="preserve">
+    <value>مرحبا بكم في الكتبي للسفريات! من خلال الوصول إلى موقعنا واستخدامه، فإنك توافق على الالتزام بشروط وأحكام الاستخدام التالية والالتزام بها. يرجى قراءة هذه الشروط بعناية قبل استخدام خدماتنا.</value>
+  </data>
+  <data name="Trusted Guidance" xml:space="preserve">
+    <value>دليل موثوق</value>
+  </data>
+  <data name="typeText" xml:space="preserve">
+    <value>اكتب رسالتك هنا...</value>
+  </data>
+  <data name="UAE Independent Climate Change Accelerators (UICCA)" xml:space="preserve">
+    <value>مسرعات تغير المناخ المستقلة في دولة الإمارات العربية المتحدة (UICCA)</value>
+  </data>
+  <data name="Updates to Policies" xml:space="preserve">
+    <value>تعديلات سياسة الخصوصية</value>
+  </data>
+  <data name="Use of Information:" xml:space="preserve">
+    <value>استخدام البيانات الشخصية</value>
+  </data>
+  <data name="User Conduct and Responsibilities" xml:space="preserve">
+    <value>سلوك المستخدم ومسؤولياته</value>
+  </data>
+  <data name="User Responsibilities:" xml:space="preserve">
+    <value>مسؤوليات المستخدم:</value>
+  </data>
+  <data name="UTP" xml:space="preserve">
+    <value>نحن نحتفظ بالحق في تحديث هذه السياسات في أي وقت. سيتم إخطار المستخدمين بأي تغييرات على موقعنا.</value>
+  </data>
+  <data name="UUR1" xml:space="preserve">
+    <value>يُحظر على المستخدمين المشاركة في أي أنشطة غير قانونية على موقعنا. وأي انتهاك لهذه الشروط قد يؤدي إلى إنهاء الخدمات.</value>
+  </data>
+  <data name="We ensure top-notch experiences for every traveler." xml:space="preserve">
+    <value>نحن نضمن تجارب رفيعة المستوى لكل مسافر.</value>
+  </data>
+  <data name="What you are looking for?" xml:space="preserve">
+    <value>ما الذي تبحث عنه؟</value>
+  </data>
+  <data name="Why choose us?" xml:space="preserve">
+    <value>لماذا نحن؟</value>
+  </data>
+  <data name="YAS HOLDING" xml:space="preserve">
+    <value>ياس القابضة</value>
+  </data>
+</root>

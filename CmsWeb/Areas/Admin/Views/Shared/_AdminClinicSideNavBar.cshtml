@@ -1,0 +1,165 @@
+﻿
+
+
+<head>
+    <link rel="stylesheet" href="https://purecss.io/css/pure/pure-min.css">
+    <link rel="stylesheet" href="https://purecss.io/layouts/side-menu/styles.css">
+
+    <link href="~/KendoUi/styles/kendo.default-turquoise.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/mnm/css/kednoedit.css" rel="stylesheet" />
+
+
+    <script src="~/KendoUi/js/jquery.min.js"></script>
+    <script src="~/KendoUi/js/jszip.min.js"></script>
+    <script src="~/KendoUi/js/kendo.all.min.js"></script>
+    <script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+    <script src="https://purecss.io/js/ui.js"></script>
+
+    <style>
+
+     [dir="ltr"]   .header {
+    margin: 0;
+    color: #333;
+    text-align: center;
+    padding: 2.5em 2em 0;
+    border-bottom: 1px solid #eee;
+}
+
+        [dir="rtl"] .header {
+            margin: 0;
+            color: #333;
+            text-align: center;
+            padding: 2.5em 2em 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        [dir="ltr"] .header, .content {
+            padding-left: 2em;
+            padding-right: 2em;
+        }
+
+       [dir="rtl"] .header, .content {
+            padding-right: 2em;
+            padding-left: 2em;
+        }
+
+
+       [dir="ltr"] #menu a {
+    color: #999;
+    border: none;
+    padding: 0.6em 0 0.6em 0.6em;
+}
+
+        [dir="ltr"] #layout {
+            padding-left: 150px;
+            left: 0;
+        }
+
+        [dir="rtl"] #layout {
+            padding-right: 150px;
+            right: 0;
+        }
+    
+        [dir="rtl"]    #menu a {
+            color: #999;
+            border: none;
+            padding: 0.6em 0.6em 0.6em 0;
+        }
+
+
+     [dir="ltr"]   #menu {
+    margin-left: -150px;
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: #191818;
+    overflow-y: auto;
+}
+
+        [dir="rtl"] #menu {
+            margin-right: -150px;
+            width: 150px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background: #191818;
+            overflow-y: auto;
+        }
+
+
+        @@media (min-width: 48em){
+         [dir="ltr"]    #menu {
+                left: 150px;
+            }
+
+            [dir="rtl"] #menu {
+                right: 150px;
+            }
+
+            [dir="ltr"] #layout {
+                padding-left: 150px;
+                left: 0;
+            }
+
+            [dir="rtl"] #layout {
+                padding-right: 150px;
+                right: 0;
+            }
+
+        }
+
+
+
+
+    </style>
+
+
+</head>
+
+<a href="#menu" id="menuLink" class="menu-link" style="    margin-top: 15em;">
+    <!-- Hamburger icon -->
+    <span></span>
+</a>
+
+<div id="menu" style="margin-top: 10em;">
+            <div class="pure-menu">
+               <ul class="pure-menu-list">
+                    <li class="pure-menu-item  pure-menu-selected">
+                            <a href="https://www.geeksforgeeks.org/about/"
+                               class="pure-menu-link">
+                                About Us
+                            </a>
+                     </li>
+                    <li class="pure-menu-item">
+                            <a href="https://www.geeksforgeeks.org/careers/"
+                               class="pure-menu-link">
+                                Careers
+                            </a>
+                    </li>
+                    <li class="pure-menu-item">
+                            <a href="https://www.geeksforgeeks.org/about/contact-us/"
+                               class="pure-menu-link">
+                                Contact Us
+                            </a>
+                    </li>
+                    <li class="pure-menu-item
+                            menu-item-divided">
+                            <a href="#content" class="pure-menu-link">
+                                Content
+                            </a>
+                    </li>
+                </ul>
+            </div>
+</div>
+
+
+
+

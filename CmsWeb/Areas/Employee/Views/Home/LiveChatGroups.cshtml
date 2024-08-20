@@ -1,0 +1,407 @@
+﻿@using CmsDataAccess;
+@using CmsWeb.Services.UserServices;
+@*<partial name="myChatPageModelAdmin" style="display:flex" />*@
+
+
+@inject IUserService userService
+
+
+<link href="~/mnm/css/kednoedit.css" rel="stylesheet" asp-append-version="true" />
+
+<script src="~/KendoUi/js/jquery.min.js"></script>
+<script src="~/KendoUi/js/jszip.min.js"></script>
+<script src="~/KendoUi/js/kendo.all.min.js"></script>
+<script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+<link rel="stylesheet" href="~/public/nav/dash.css" />
+
+<link rel="stylesheet" href="~/public/nav/chatpopup.css" />
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+
+
+@{
+    SelectList companyEmployees = new SelectList(new ApplicationDbContext().CompanyEmployee.Select(a => new { Id = a.Id, Name = a.FullName }), "Id", "Name");
+}
+
+<style>
+    .chatListContainer li {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+
+
+
+</style>
+
+
+
+<div class="row" style="justify-content:space-evenly">
+
+@*    <div class="col-3 notAssigned hintText">
+        Waiting
+    </div>*@
+    <div class="col-3 assignedE hintText">
+        Processing
+        <span class="newMsgDashBoard">&#x1F534;</span>
+
+    </div>
+    <div class="col-3 Finished hintText">
+        Finished
+    </div>
+
+</div>
+
+<br />
+
+
+@(
+Html.Kendo().Grid<ConnectionGroup>()
+    .Name("grid")
+    .ToolBar
+     (
+     toolbar =>
+     {
+
+     })
+                .Columns(columns =>
+                {
+
+
+                    columns.Bound(p => p.CreateDate).Editable("returnFalse");
+                    columns.Bound(p => p.GroupName).Title("Chat Name").Editable("returnFalse");
+
+
+                    @*columns.ForeignKey(p => p.CompanyEmployeeId, (SelectList)ViewBag.Employees).Title("Employee");*@
+
+                    columns.Command(command =>
+                    {
+                        command.Custom("myEdit").Text("<span   style='font-size:24px; cursor: pointer; color: rgb(45,61,77)'><i class='fas fa-comments'></i></span>").Click("goEdit");
+                    }).Width(250).Title("Open");
+                }
+
+                )
+                .HtmlAttributes(new { @class = "custom-grid" }) // Add a custom class
+
+                .Mobile(MobileMode.Auto)
+
+                .Editable(ed => { ed.Mode(GridEditMode.InLine); ed.DisplayDeleteConfirmation(true); })
+
+                .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(25)
+                .Responsive(true)
+                .Info(true)
+                .Numeric(true)
+                )
+                .Sortable()
+                .Navigatable()
+                .Resizable(r => r.Columns(true))
+                .Reorderable(r => r.Columns(true))
+                .Filterable()
+                .Scrollable()
+
+
+
+                .DataSource(
+                    dataSource => dataSource
+
+                    .Ajax()
+
+@*.ServerOperation(false)*@
+.PageSize(20)
+                    .Model(model => model.Id(p => p.Id))
+                    .Model(model => model.Field(p => p.CompanyEmployeeId).DefaultValue(Guid.Empty))
+                    .Read(read => read.Action("Read_Chats", "Home", new { empId = userService .GetMyId()}).Type(HttpVerbs.Get))
+                    .Update(upda => upda.Action("Update_Chats", "Home"))
+
+                .Events(events => events.Sync("sync_handler").RequestEnd("requestEnd").RequestStart("requestStart"))
+
+                )
+                .Events(events => events.DataBound("onDataBound"))
+                .Events(events => events.DataBinding("onDataBind"))
+
+)
+
+<script>
+
+
+
+    function dirtyField(data, fieldName) {
+        if (data.dirty && data.dirtyFields[fieldName]) {
+            return "<span class='k-dirty'></span>"
+        }
+        else {
+            return "";
+        }
+    }
+
+
+    function sync_handler() {
+        $("#grid").getKendoGrid().dataSource.read();
+
+    }
+    function sync_handler_on_New() {
+        $("#grid").getKendoGrid().dataSource.read();
+
+    }
+
+        function showNotification(num) {
+        if(num==0)
+        {
+        document.querySelector('.newMsgDashBoard').style.display = 'none';
+        }
+                if(num>0)
+        {
+        document.querySelector('.newMsgDashBoard').style.display = 'block';
+        }
+     
+    }
+
+
+
+                var itemsWithStatusZero=0;
+
+
+
+
+
+    function requestEnd(e) {
+        if (e.type == "create") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+        if (e.type == "update") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+    }
+
+    function requestStart(e) {
+        if (e.type == "create") {
+
+        }
+    }
+
+
+
+
+
+    function returnFalse() {
+        return false;
+    }
+
+    function onDataBound(e) {
+        var grid = this;
+        grid.table.find("tr").each(function () {
+            var dataItem = grid.dataItem(this);
+
+            $(this).find('script').each(function () {
+                eval($(this).html());
+            });
+
+            kendo.bind($(this), dataItem);
+        });
+    }
+
+
+    function onDataBind() {
+
+        var grid1 = $("#grid").data("kendoGrid");
+        grid1.bind("dataBound", grid_dataBound1);
+        function grid_dataBound1(e1) {
+            itemsWithStatusZero = 0;
+
+            var items1 = e1.sender.items();
+            items1.each(function (index) {
+                var dataItem1 = grid1.dataItem(this);
+                this.className = "k-alt !important";
+
+                if (dataItem1.Status == 0) {
+                    this.className = "notAssigned";
+                }
+                if (dataItem1.Status == 1) {
+                    this.className = "assignedE";
+                    itemsWithStatusZero = itemsWithStatusZero + 1;
+
+                }
+
+                if (dataItem1.Status == 2) {
+                    this.className = "Finished";
+                }
+            })
+            showNotification(itemsWithStatusZero);
+
+        }
+    }
+
+
+
+
+</script>
+
+<script id="Temp_Destroy" type="text/kendo-tmpl">
+    <span class="k-grid-delete" style="font-size:24px;cursor:pointer;color:rgb(45,61,77)"><i class="fa fa-trash"></i></span>
+</script>
+
+<script id="Temp_Edit" type="text/kendo-tmpl">
+    <span   style="font-size:24px;cursor:pointer;color:rgb(45,61,77)"><i class="fas fa-edit"></i></span>
+</script>
+
+<script>
+
+    function goEdit(e) {
+
+        dataItemPay = this.dataItem($(e.currentTarget).closest("tr"));
+        transferId = dataItemPay.Id;
+
+        debugger;
+        if (dataItemPay.Status==2) {
+
+            var url = "/Employee/Home/SingleChatPageHistory/" + transferId;
+
+            var a = document.createElement('a');
+            a.target = "_blank";
+            a.href = url;
+            a.click();
+            return;
+        }
+
+
+        var url = "/Employee/Home/SingleChatPage/" + dataItemPay.GroupName;
+
+        var a = document.createElement('a');
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="~/js/chatAddGroup.js"></script>
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+
+        var connection1 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        // Start the connection
+        connection1.start().then(function () {
+            // Invoke the hub method when the connection is established
+            connection1.invoke("getGroups", "System");
+        }).catch(function (err) {
+            console.error(err.toString());
+        });
+
+
+
+        // Check if the cookie exists
+        var existingClientId = getCookie("clientId");
+
+        if (!existingClientId) {
+            // Generate a new client ID
+            var newClientId = generateClientId();
+
+            // Set the cookie
+            setCookie("clientId", newClientId);
+
+            // Set the value to a hidden input
+            var hiddenInput = document.getElementById("clientIdInput");
+            if (hiddenInput) {
+                // Set the value attribute
+                hiddenInput.value = newClientId;
+
+                // Trigger the change event (if needed)
+                var event = new Event('change');
+                hiddenInput.dispatchEvent(event);
+            }
+        }
+        else {
+            var hiddenInput = document.getElementById("clientIdInput");
+            hiddenInput.value = existingClientId;
+        }
+
+
+
+    });
+</script>
+
+
+<script>
+        var connection11 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+    connection11.on("RefreshEmployeeChatGrid_", function (group) {
+        sync_handler_on_New();
+});
+
+
+    connection11.start().then(function () {
+        //document.getElementById("sendButton").disabled = false;
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+</script>

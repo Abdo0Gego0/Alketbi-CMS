@@ -1,0 +1,747 @@
+﻿@using CmsDataAccess;
+@using CmsDataAccess.Enums;
+
+
+@{
+    string preferredCulture = ViewBag.PreferredCulture;
+
+}
+
+
+<link href="~/mnm/css/kednoedit.css" rel="stylesheet" asp-append-version="true" />
+
+<script src="~/KendoUi/js/jquery.min.js"></script>
+<script src="~/KendoUi/js/jszip.min.js"></script>
+<script src="~/KendoUi/js/kendo.all.min.js"></script>
+<script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+<link rel="stylesheet" href="~/public/nav/dash.css" />
+
+<link rel="stylesheet" href="~/public/nav/chatpopup.css" />
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+@{
+    SelectList companyEmployees = new SelectList(new ApplicationDbContext().CompanyEmployee.Where(a=>a.Type==1).Select(a => new { Id = a.Id, Name = a.FullName }), "Id", "Name");
+    SelectList rt = new SelectList(RequestTypeEnum.RequestTypes, "Id", "Name");
+}
+
+@{
+
+    int tot = new ApplicationDbContext().NewRequest.Count();
+}
+
+
+
+
+<style>
+
+    .parentRow
+    {
+        place-content:center;
+    }
+
+    .childRow
+    {
+        height:150px;
+        box-shadow: 6px 6px 6px 0px rgba(19, 80, 81, 0.50);
+        width: 100%;
+        background-color: #B5c3cb;
+        align-items: center;
+        border-radius: 20px;
+    }
+
+    .childCol
+    {
+        color: black;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .childImg
+    {
+        max-width: 100%
+
+    }
+
+@@media screen and (max-width:768px){
+
+
+
+        .childRow {
+            height: 10%;
+            box-shadow: 6px 6px 6px 0px rgba(19, 80, 81, 0.50);
+            width: 100%;
+            background-color: #B5c3cb;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .mobTick
+        {
+            display:grid;
+            justify-content:center;
+            place-content:center;
+            width:35%;
+
+        }
+}
+
+
+
+
+</style>
+
+
+
+
+
+@*<h2 class="mb-4">Sidebar #01</h2>*@
+
+@*<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+</nav>*@
+
+
+
+    <center>
+    <div class="row parentRow" style="justify-content:center">
+
+    <div class="col-md-5 mb-5">
+
+        <div class="form-groub">
+
+            <div class="row childRow" style="justify-content:center">
+                <div class="col-md-8 childCol">
+
+                    <label>
+                        @tot
+                    </label>
+                    <br />
+                    <label>
+                        Total number
+                        of requests
+                    </label>
+
+                </div>
+
+                <div class="col-md-4 mobTick">
+
+                    <img src="~/admin/images/ticket-flight 1.svg" class="childImg" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+    </center>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<canvas id="lineChart" width="600" height="150" style="padding: 20px;background: rgba(145, 164, 176, 0.50);border-radius:20px"></canvas>
+
+
+
+        <script>
+
+    // Assuming countsPerYear is passed from the server-side or defined in your script
+    var countsPerYear = @Html.Raw(Json.Serialize(ViewBag.stats));
+
+    var years = countsPerYear.map(item => item.Year);
+    var counts = countsPerYear.map(item => item.Count);
+
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [{
+                data: counts,
+                borderColor: '#000', // Line color
+                backgroundColor: "#000",
+
+                borderWidth: 2, // Line width
+                fill: false // Do not fill the area under the line
+            }]
+        },
+        options: {
+            
+            plugins: {
+                legend: {
+                display: false
+            },
+                title: {
+                    display: true,
+                    text: 'Total number of requests',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    },
+                        font: {
+                        size: 24,
+                        color:"black"
+                    }
+                }},
+
+            scales: {
+
+                
+                y: {
+                    type: 'linear',
+                    position: 'left'
+                }
+            },
+            
+        }
+    });
+
+
+</script>
+
+
+<br />
+
+
+
+
+@*   Circles    *@
+
+<div class="container">
+
+    <div class="row" style="justify-content:space-evenly;width:104%">
+
+            <div  class="col-md-2 servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(1)">
+                <div class="adjustContentMobile">
+
+                <div id="11" class="imgRounded">
+                    <img  src="~/public/images/serv1.svg"/>
+                </div>
+                </div>
+
+                <div class="divBorder">
+
+                <h2>
+                Airline
+                Reservations
+                </h2>
+
+
+                </div>
+            </div>
+
+            <div  class="col-md-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(2)">
+                <div class="adjustContentMobile">
+                <div id="22" class="imgRounded">
+                    <img src="~/public/images/serv2.svg" />
+                    </div>
+                </div>
+                <div class="divBorder">
+                    <h2>
+                Hotel / Apartment
+                Reservations
+                        
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+            <div  class="col-md-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(3)">
+                <div class="adjustContentMobile">
+
+                <div id="33" class="imgRounded">
+                    <img src="~/public/images/serv3.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder">
+
+                <h2>
+                Luxury Travel
+                services
+
+                    
+                </h2>
+
+            </div>
+        </div>
+
+            <div  class="col-md-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(4)">
+                <div class="adjustContentMobile">
+
+                <div id="44" class="imgRounded">
+                    <img src="~/public/images/serv4.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder">
+
+                <h2>
+                Honeymoon
+                packages
+                </h2>
+
+                </div>
+            </div>
+
+
+
+    <div class="col-md-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(5)">
+                <div class="adjustContentMobile">
+
+                <div id="55" class="imgRounded">
+                    <img src="~/public/images/serv5.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder noBorder1">
+
+                <h2>
+                Tour Packages
+
+                    
+                </h2>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+</div>
+
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+@* Request List *@
+
+<div class="row" style="justify-content:space-evenly">
+
+    <div class="col-3 notAssigned hintText" style="position:relative">
+        Waiting
+        <span class="newMsgDashBoard">&#x1F534;</span>
+
+    </div>
+    <div class="col-3 assignedE hintText">
+        Processing
+    </div>
+    <div class="col-3 Finished hintText">
+        Finished
+    </div>
+
+</div>
+
+<br />
+
+@(
+Html.Kendo().Grid<NewRequest>()
+    .Name("grid")
+    .ToolBar
+     (
+     toolbar =>
+     {
+         @*toolbar.Search().Text("Search...");*@
+     })
+                .Columns(columns =>
+                {
+
+
+                    columns.Bound(p => p.CreateDate).Editable("returnFalse").Title("Date");
+                    columns.Bound(p => p.ClientName).Editable("returnFalse").Title("Name");
+                    columns.Bound(p => p.ClientPhone).Editable("returnFalse").Title("Phone");
+                    columns.Bound(p => p.ClientEmail).Editable("returnFalse").Title("Mail");
+                    columns.ForeignKey(p => p.RequestType, rt).Editable("returnFalse").Title("Type");
+
+
+
+                    columns.ForeignKey(p => p.CompanyEmployeeId, companyEmployees).Title("Employee");
+
+                    columns.Command(command =>
+                    {
+                        command.Edit().Text("Assign to Employee").UpdateText("Assign").CancelText("Cancel");
+                    }).Width(250).Title("Actions");
+
+                }
+
+
+
+                )
+                .Mobile(MobileMode.Phone)
+
+                .Editable(ed => { ed.Mode(GridEditMode.InLine); ed.DisplayDeleteConfirmation(true); })
+
+                .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(25)
+                .Responsive(true)
+                .Info(true)
+                .Numeric(true)
+                )
+                .Sortable()
+                .Navigatable()
+                .Resizable(r => r.Columns(true))
+                .Reorderable(r => r.Columns(true))
+                .Filterable()
+                .Scrollable()
+
+
+                .HtmlAttributes(new { @class = "custom-grid" }) // Add a custom class
+
+                .DataSource(
+                    dataSource => dataSource
+
+                    .Ajax()
+@*.ServerOperation(false)*@
+.PageSize(20)
+                    .Model(model => model.Id(p => p.Id))
+                    .Model(model => model.Field(p => p.CompanyEmployeeId).DefaultValue(Guid.Empty))
+                    .Read(read => read.Action("Read_NewRequests", "Home").Type(HttpVerbs.Get))
+                    .Update(upda => upda.Action("Update_NewRequests", "Home"))
+
+                    
+
+                .Events(events => events.Sync("sync_handler").RequestEnd("requestEnd").RequestStart("requestStart"))
+
+                )
+                .Events(events => events.Edit("onEdit"))
+                .Events(events => events.DataBound("onDataBound"))
+                .Events(events => events.DataBinding("onDataBind"))
+
+)
+
+
+
+
+
+
+
+<script>
+
+
+
+    function CreateEmployee() {
+        window.location = '@Url.Action( "CreateEmployee", "Employees", new { area = "Admin" })';
+
+    }
+
+    function dirtyField(data, fieldName) {
+        if (data.dirty && data.dirtyFields[fieldName]) {
+            return "<span class='k-dirty'></span>"
+        }
+        else {
+            return "";
+        }
+    }
+
+
+    function sync_handler() {
+        $("#grid").getKendoGrid().dataSource.read();
+
+    }
+
+    function sync_handler_on_New() {
+        $("#grid").getKendoGrid().dataSource.read();
+
+
+
+
+
+
+    }
+
+
+
+    function showNotification(num) {
+        if(num==0)
+        {
+        document.querySelector('.newMsgDashBoard').style.display = 'none';
+        }
+                if(num>0)
+        {
+        document.querySelector('.newMsgDashBoard').style.display = 'block';
+        }
+     
+    }
+
+
+
+                var itemsWithStatusZero=0;
+
+
+    function requestEnd(e) {
+        //if (e.type == "create") {
+        //    if (!e.response.Data)
+        //        alert(JSON.stringify(e.response));
+        //    return;
+        //}
+        //if (e.type == "update") {
+        //    if (!e.response.Data)
+        //        alert(JSON.stringify(e.response));
+        //    return;
+        //}
+
+
+
+
+    }
+
+    function requestStart(e) {
+        if (e.type == "create") {
+
+        }
+    }
+
+
+
+    function onEdit(e) {
+
+
+    }
+
+    function returnFalse() {
+        return false;
+    }
+
+    function onDataBound(e) {
+        var grid = this;
+        grid.table.find("tr").each(function () {
+            var dataItem = grid.dataItem(this);
+
+            $(this).find('script').each(function () {
+                eval($(this).html());
+            });
+
+            kendo.bind($(this), dataItem);
+        });
+    }
+
+  
+
+    function onDataBind() {
+
+        var grid1 = $("#grid").data("kendoGrid");
+        grid1.bind("dataBound", grid_dataBound1);
+
+       
+           function grid_dataBound1(e1) {
+
+
+            itemsWithStatusZero=0;
+            var items1 = e1.sender.items();
+            items1.each(function (index) {
+                var dataItem1 = grid1.dataItem(this);
+                this.className = "k-alt !important";
+
+                if (dataItem1.Status==0) {
+                    this.className = "notAssigned";
+                    itemsWithStatusZero = itemsWithStatusZero+1;
+
+
+                }
+                                if (dataItem1.Status==1) {
+                    this.className = "assignedE";
+                }
+
+                                                if (dataItem1.Status==2) {
+                    this.className = "Finished";
+                }
+
+               
+
+            })
+                showNotification(itemsWithStatusZero);
+        }
+
+ 
+        
+
+  
+    
+    }
+
+
+</script>
+
+<script id="Temp_Destroy" type="text/kendo-tmpl">
+    <span class="k-grid-delete" style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fa fa-trash"></i></span>
+</script>
+
+<script id="Temp_Edit" type="text/kendo-tmpl">
+    <span   style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fas fa-edit"></i></span>
+</script>
+
+<script>
+
+    function goEdit(e) {
+
+        dataItemPay = this.dataItem($(e.currentTarget).closest("tr"));
+        transferId = dataItemPay.Id;
+
+        var url = "/Admin/Employees/EditEmployee/" + transferId;
+
+        var a = document.createElement('a');
+        //a.target = "_blank";
+        a.href = url;
+        a.click();
+
+    }
+
+</script>
+
+
+
+            <input name="serviceType" id="serviceType" hidden />
+
+
+<script>
+
+    var connection11 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+    connection11.on("RefreshAdminOrderGrid_", function (group) {
+        sync_handler_on_New();
+});
+
+
+    connection11.start().then(function () {
+        //document.getElementById("sendButton").disabled = false;
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
+
+
+
+
+
+    
+    function toggleStyle(sectionId) {
+        if(sectionId=="1")
+        {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('11');
+            myElement.classList.add('clickedItem');
+        }
+
+        if (sectionId == "2") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.add('clickedItem');
+        }
+
+        if (sectionId == "3") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('33');
+            myElement.classList.add('clickedItem');
+
+        }
+
+
+
+        if (sectionId == "4") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('44');
+            myElement.classList.add('clickedItem');
+
+        }
+
+        if (sectionId == "5") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('55');
+            myElement.classList.add('clickedItem');
+
+        }
+
+        var grid = $("#grid").data("kendoGrid");
+
+// Assuming you have a query string parameter named 'myParameter'
+
+// Use the read method with additional parameters
+grid.dataSource.read({ serviceType: sectionId });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+

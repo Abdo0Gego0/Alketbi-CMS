@@ -1,0 +1,447 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<partial name="_PublicNavBar" style="padding-bottom:65px" />
+
+<link rel="stylesheet" href="~/public/nav/home.css" />
+
+<style>
+
+    ::placeholder {
+
+    padding: 15px;
+        color: #000;
+        font-family: Arial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+}
+
+
+.clickedItem
+{
+        background: #91A4B0 !important;
+        border: 1px solid #BEA57C;
+        box-shadow: -3px 5px 8px rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+<div class="row zeroMarginMobile" style="width:100%;height:100%">
+    <div class="col-md-6 bg-image1">
+
+    </div>
+
+    <div class="col-md-6 servicesStyle mt-7">
+
+        <center>
+        <h1>
+            @Localizer["What you are looking for?"]
+        </h1>
+        <br/>
+        </center>
+
+        <div class="row" style="justify-content:space-evenly;width:107%">
+
+            <div  class="col-2 servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(1)">
+                <div class="adjustContentMobile">
+
+                <div id="11" class="imgRounded">
+                    <img  src="~/public/images/serv1.svg"/>
+                </div>
+                </div>
+
+                <div class="divBorder">
+
+                <h2>
+                        @Localizer["serv1Titl"]
+                </h2>
+                <p>
+                        @Localizer["serv1Cont"]
+
+                    </p>
+
+                </div>
+            </div>
+
+            <div  class="col-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(2)">
+                <div class="adjustContentMobile">
+                <div id="22" class="imgRounded">
+                    <img src="~/public/images/serv2.svg" />
+                    </div>
+                </div>
+                <div class="divBorder">
+                    <h2>
+                        @Localizer["serv2Titl"]
+                        
+                    </h2>
+                                        <p>
+                        @Localizer["serv2Cont"]
+
+                        
+                    </p>
+                </div>
+
+
+            </div>
+
+            <div  class="col-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(3)">
+                <div class="adjustContentMobile">
+
+                <div id="33" class="imgRounded">
+                    <img src="~/public/images/serv3.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder">
+
+                <h2>
+                        @Localizer["serv3Titl"]
+
+                    
+                </h2>
+                <p>
+                        @Localizer["serv3Cont"]
+
+   
+                </p>
+            </div>
+        </div>
+
+            <div id="wrapper_1" class="col-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(4)">
+                <div class="adjustContentMobile">
+
+                <div id="44" class="imgRounded">
+                    <img src="~/public/images/serv4.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder">
+
+                <h2>
+                        @Localizer["serv4Titl"]
+                </h2>
+
+                <p>
+                        @Localizer["serv4Cont"]
+
+                    
+                </p>
+                </div>
+            </div>
+
+
+
+            <div  class="col-2  servicesElementStyle" style="cursor:pointer" onclick="toggleStyle(5)">
+                <div class="adjustContentMobile">
+
+                <div id="55" class="imgRounded">
+                    <img src="~/public/images/serv5.svg" />
+                    </div>
+                </div>
+                <div class="divBorder noBorder noBorder1">
+
+                <h2>
+                        @Localizer["serv5Titl"]
+
+                    
+                </h2>
+                                <p>
+                        @Localizer["serv5Cont"]
+
+                    
+                </p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <br />
+
+        <form method="post" action="OurServices" class="formMarginTop">
+            <input name="serviceType" id="serviceType" hidden />
+            <center>
+
+                <div class ="row width107" style="margin:0px;justify-content:space-evenly;">
+                    <div class="col-md-8 mb-2">
+
+
+                        <div class="row" style="justify-content:space-evenly;width:100%">
+
+                            <div class="col-2  myLabel">
+                                @Localizer["Name:"]
+                            </div>
+                            <div class="col-8 padInput">
+                                <input name="name" required />
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+
+
+                    
+                    
+                         
+
+                    </div>
+                </div>
+
+                <div class="row width107" style="margin:0px;justify-content:space-evenly;">
+                    <div class="col-md-8 mb-2">
+
+
+                        <div class="row" style="justify-content:space-evenly;width:100%">
+                            <div class="col-2  myLabel">
+                                @Localizer["Email:"]
+                            </div>
+                            <div class="col-8 padInput">
+                                <input name="mail" type="email" required />
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row width107" style="margin:0px;justify-content:space-evenly;">
+                    <div class="col-md-8 mb-2">
+
+
+
+                        <div class="row" style="justify-content:space-evenly;width:100%">
+                            <div class="col-2  myLabel">
+                                @Localizer["Phone:"]
+                            </div>
+                            <div class="col-8 padInput">
+                                <input name="phone" type="text" required />
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row width107 hideOnMobile" style="margin:0px;justify-content:space-evenly;">
+                    <div class="col-md-8 mb-2">
+
+                        <div class="row" style="justify-content:space-evenly;width:100%">
+                            <div class="col-3  myLabel">
+                                @Localizer["Observations:"]
+                            </div>
+                            <div class="col-7 padInput">
+                                <input name="obs" type="text" />
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row width107 showOMobile" style="margin:0px;justify-content:space-evenly;">
+                    <div class="col-md-8 mb-2">
+
+                        <div class="row" style="justify-content:space-evenly;width:100%">
+                            <div class="col-4  myLabel">
+                                @Localizer["Observations:"]
+                            </div>
+                            <div class="col-8 padInput">
+                                <input name="obs" type="text" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                </center>
+            <center>
+                <div class="row" style="width:85%;justify-content:center">
+                    <div class="col-md-6 mb-2">
+
+                        <button type="submit">  @Localizer["Submit"]  </button>
+
+                    </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+                @{
+
+                    if(ViewBag.msg!=null)
+                    {
+                        <div class="successMsg">
+                            @ViewBag.msg
+                        </div>
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+
+                @*<div id="divcaptcha"></div>*@
+			@*<input id="textcaptcha" type="text" style="display:none" required/>*@
+
+            </center>
+
+
+			
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<partial name="_Footer" style="display:flex" />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+
+
+
+    function toggleStyle(sectionId) {
+
+        document.getElementById('serviceType').value = sectionId;
+
+        if(sectionId=="1")
+        {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('11');
+            myElement.classList.add('clickedItem');
+
+        }
+
+        if (sectionId == "2") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('22');
+            myElement.classList.add('clickedItem');
+
+        }
+
+        if (sectionId == "3") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('33');
+            myElement.classList.add('clickedItem');
+
+        }
+
+
+
+        if (sectionId == "4") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('44');
+            myElement.classList.add('clickedItem');
+
+        }
+
+        if (sectionId == "5") {
+            var myElement = document.getElementById('11');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('22');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('33');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('44');
+            myElement.classList.remove('clickedItem');
+            myElement = document.getElementById('55');
+            myElement.classList.remove('clickedItem');
+
+            myElement = document.getElementById('55');
+            myElement.classList.add('clickedItem');
+
+        }
+    }
+
+
+</script>
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+
+<script type="text/javascript">
+    var onloadCallback = function () {
+        grecaptcha.render('divcaptcha', {
+            'sitekey': '6LffdBUoAAAAAMQvTj7svuM774YGqDdcvaLjDnWA',
+            'callback': function (response) {
+                $('#textcaptcha').val('t')
+            },
+        });
+    };
+</script>

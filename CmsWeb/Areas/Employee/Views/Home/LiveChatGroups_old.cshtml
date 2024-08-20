@@ -1,0 +1,312 @@
+﻿@using CmsDataAccess;
+@*<partial name="myChatPageModelAdmin" style="display:flex" />*@
+
+
+<script src="~/KendoUi/js/jquery.min.js"></script>
+<script src="~/KendoUi/js/jszip.min.js"></script>
+<script src="~/KendoUi/js/kendo.all.min.js"></script>
+<script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+
+
+@{
+    SelectList companyEmployees = new SelectList(new ApplicationDbContext().CompanyEmployee.Select(a => new { Id = a.Id, Name = a.FullName }), "Id", "Name");
+}
+
+<style>
+    .chatListContainer li {
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+
+
+
+
+
+@(
+Html.Kendo().Grid<ConnectionGroup>()
+    .Name("grid")
+    .ToolBar
+     (
+     toolbar =>
+     {
+
+     })
+                .Columns(columns =>
+                {
+
+
+                    columns.Bound(p => p.CreateDate).Editable("returnFalse");
+                    columns.Bound(p => p.GroupName).Editable("returnFalse"); 
+
+
+                    columns.ForeignKey(p => p.CompanyEmployeeId, (SelectList)ViewBag.Employees).Title("Employee");
+
+                    columns.Command(command =>
+                    {
+                        command.Edit().Text("Assign to Employee").UpdateText("Assign").CancelText("Cancel");
+                    }).Width(250).Title("Actions");
+                }
+
+                )
+                .Mobile(MobileMode.Auto)
+
+                .Editable(ed => { ed.Mode(GridEditMode.InLine); ed.DisplayDeleteConfirmation(true); })
+
+                .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(25)
+                .Responsive(true)
+                .Info(true)
+                .Numeric(true)
+                )
+                .Sortable()
+                .Navigatable()
+                .Resizable(r => r.Columns(true))
+                .Reorderable(r => r.Columns(true))
+                .Filterable()
+                .Scrollable()
+
+
+                .HtmlAttributes(new { @class = "custom-grid" }) // Add a custom class
+
+                .DataSource(
+                    dataSource => dataSource
+                    
+                    .Ajax()
+                    
+@*.ServerOperation(false)*@
+.PageSize(20)
+                    .Model(model => model.Id(p => p.Id))
+                    .Model(model => model.Field(p => p.CompanyEmployeeId).DefaultValue(Guid.Empty))
+                    .Read(read => read.Action("Read_Chats", "Home").Type(HttpVerbs.Get))
+                    .Update(upda => upda.Action("Update_Chats", "Home"))
+
+                .Events(events => events.Sync("sync_handler").RequestEnd("requestEnd").RequestStart("requestStart"))
+
+                )
+                .Events(events => events.DataBound("onDataBound"))
+)
+
+<script>
+
+
+
+    function dirtyField(data, fieldName) {
+        if (data.dirty && data.dirtyFields[fieldName]) {
+            return "<span class='k-dirty'></span>"
+        }
+        else {
+            return "";
+        }
+    }
+
+
+    function sync_handler() {
+        $("#grid").getKendoGrid().dataSource.read();
+
+    }
+
+    function requestEnd(e) {
+        if (e.type == "create") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+        if (e.type == "update") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+    }
+
+    function requestStart(e) {
+        if (e.type == "create") {
+
+        }
+    }
+
+
+
+
+
+    function returnFalse() {
+        return false;
+    }
+
+    function onDataBound(e) {
+        var grid = this;
+        grid.table.find("tr").each(function () {
+            var dataItem = grid.dataItem(this);
+
+            $(this).find('script').each(function () {
+                eval($(this).html());
+            });
+
+            kendo.bind($(this), dataItem);
+        });
+    }
+
+</script>
+
+<script id="Temp_Destroy" type="text/kendo-tmpl">
+    <span class="k-grid-delete" style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fa fa-trash"></i></span>
+</script>
+
+<script id="Temp_Edit" type="text/kendo-tmpl">
+    <span   style="font-size:24px;cursor:pointer;color:rgba(1, 81, 83, 1)"><i class="fas fa-edit"></i></span>
+</script>
+
+<script>
+
+    function goEdit(e) {
+
+        dataItemPay = this.dataItem($(e.currentTarget).closest("tr"));
+        transferId = dataItemPay.Id;
+
+        var url = "/Admin/Employees/EditEmployee/" + transferId;
+
+        var a = document.createElement('a');
+        //a.target = "_blank";
+        a.href = url;
+        a.click();
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container chatListContainer">
+
+    <input type="text" class="w-100" id="clientIdInput" hidden />
+
+
+    <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList">
+            </ul>
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row p-1">
+        <div class="col-6">
+            <input type="button" class="form-control btn-primary" id="sendButton" value="Click on the Client name to Open Chat" />
+        </div>
+    </div>
+</div>*@
+
+
+<script src="~/js/chatAddGroup.js"></script>
+
+
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+
+        var connection1 = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        // Start the connection
+        connection1.start().then(function () {
+            // Invoke the hub method when the connection is established
+            connection1.invoke("getGroups", "System");
+        }).catch(function (err) {
+            console.error(err.toString());
+        });
+
+
+
+        // Check if the cookie exists
+        var existingClientId = getCookie("clientId");
+
+        if (!existingClientId) {
+            // Generate a new client ID
+            var newClientId = generateClientId();
+
+            // Set the cookie
+            setCookie("clientId", newClientId);
+
+            // Set the value to a hidden input
+            var hiddenInput = document.getElementById("clientIdInput");
+            if (hiddenInput) {
+                // Set the value attribute
+                hiddenInput.value = newClientId;
+
+                // Trigger the change event (if needed)
+                var event = new Event('change');
+                hiddenInput.dispatchEvent(event);
+            }
+        }
+        else {
+            var hiddenInput = document.getElementById("clientIdInput");
+            hiddenInput.value = existingClientId;
+        }
+
+
+
+    });
+</script>
+

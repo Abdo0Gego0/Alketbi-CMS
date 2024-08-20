@@ -1,0 +1,68 @@
+﻿@page
+@using CmsWeb.Services.Chat;
+
+<link rel="stylesheet" href="~/public/nav/dash.css" />
+
+
+@inject IChatService chatService
+
+@{
+    List<ChatMessages> mes = chatService.GetGroupsMessage(Guid.Parse(ViewBag.gId));
+}
+
+<div class="chatTitle">
+    Clients Help
+</div>
+<br />
+<div class="container chatListContainer" style="width:80%">
+
+
+
+    <div class="row p-2 scrollMsg">
+
+
+
+        <div id="messagesList">
+
+            @{
+                foreach (var item in mes)
+                {
+                    if (item.Sender == 1)
+                    {
+                        <div class="classDestionation">@item.Message
+                        </div>
+                        <span>@item.CreateDate</span>
+
+
+
+                    }
+                    else
+                    {
+                        <div style="justify-content:end;display:flex">
+                            <div class="classSource">@item.Message</div>
+
+                        </div>
+                        <div style="justify-content:end;display:flex">
+
+                        <span>@item.CreateDate</span>
+                                    </div>
+
+
+
+                    }
+                }
+            }
+        </div>
+
+        <div class="row p-1">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+

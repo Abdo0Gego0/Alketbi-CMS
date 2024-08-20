@@ -1,0 +1,253 @@
+﻿@using CmsDataAccess.Enums;
+@{
+    string preferredCulture = ViewBag.PreferredCulture;
+
+}
+
+<link href="~/mnm/css/kednoedit.css" rel="stylesheet" asp-append-version="true" />
+
+<script src="~/KendoUi/js/jquery.min.js"></script>
+<script src="~/KendoUi/js/jszip.min.js"></script>
+<script src="~/KendoUi/js/kendo.all.min.js"></script>
+<script src="~/KendoUi/js/kendo.aspnetmvc.min.js"></script>
+
+
+
+@*<partial name="_EmployeesHorzBar" />*@
+
+@{
+    SelectList jt = new SelectList(JobTypeEnum.JobTypes, "Id", "Name");
+
+}
+
+
+@(
+Html.Kendo().Grid<CompanyEmployee>()
+    .Name("grid")
+    .ToolBar
+     (
+     toolbar =>
+     {
+         toolbar.Custom().HtmlAttributes(new { @onclick = "CreateEmployee()", @class = "addCtrl" }).Text("Add New Employee").IconClass("k-icon k-i-plus k-button-icon")
+         ;
+     })
+                .Columns(columns =>
+                {
+
+                    
+                    columns.Bound(p => p.Image)
+                .ClientTemplate(
+                    @"<div class='prof-photo'
+                        style='background-image: url(" + @Url.Content("#:Image#") + ");'></div>")
+                    
+                    .Width(100)
+                    .Title(" ").Filterable(false);
+
+
+                    columns.Bound(p => p.FullName).Title("Full Name").Filterable(false);
+                    columns.ForeignKey(p => p.Type,jt).Title("Job Position").Filterable(false);
+                    columns.Bound(p => p.JobCardNumber).Title("Labor Card Number").Filterable(false);
+
+                    columns.Command(command =>
+                    {
+                        command.Custom("myEdit").Text("<span   style='font-size:24px; cursor: pointer; color: rgb(45,61,77)'><i class='fas fa-edit'></i></span>").Click("goEdit");
+                        command.Destroy().TemplateId("Temp_Destroy");
+                    }).Width(250).Title("Actions");
+
+                }
+
+
+
+                )
+                .Mobile(MobileMode.Auto)
+
+                .Editable(ed => { ed.Mode(GridEditMode.InLine); ed.DisplayDeleteConfirmation(true); })
+
+                .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(25)
+                .Responsive(true)
+                .Info(true)
+                .Numeric(true)
+                )
+                .Sortable()
+                .Navigatable()
+                .Resizable(r => r.Columns(true))
+                .Reorderable(r => r.Columns(true))
+                .Filterable()
+                .Scrollable()
+
+
+                .HtmlAttributes(new { @class = "custom-grid" }) // Add a custom class
+
+                .DataSource(
+                    dataSource => dataSource
+
+                    .Ajax()
+@*.ServerOperation(false)*@
+.PageSize(20)
+                    .Model(model => model.Id(p => p.Id))
+                    .Read(read => read.Action("Read_Employees", "Employees", new { preferredCulture }).Type(HttpVerbs.Get))
+
+                    .Destroy(destroy =>
+                    {
+                        destroy.Action("Destroy_Employee", "Employees");
+
+
+
+                    })
+
+                .Events(events => events.Sync("sync_handler").RequestEnd("requestEnd").RequestStart("requestStart"))
+
+                )
+                .Events(events => events.Edit("onEdit"))
+                .Events(events => events.DataBound("onDataBound"))
+)
+
+
+
+
+
+
+
+<script>
+
+
+
+    function CreateEmployee() {
+        window.location = '@Url.Action( "CreateEmployee", "Employees", new { area = "Admin" })';
+
+    }
+
+    function dirtyField(data, fieldName) {
+        if (data.dirty && data.dirtyFields[fieldName]) {
+            return "<span class='k-dirty'></span>"
+        }
+        else {
+            return "";
+        }
+    }
+
+
+    function sync_handler() {
+        this.read();
+    }
+
+    function requestEnd(e) {
+        if (e.type == "create") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+        if (e.type == "update") {
+            if (!e.response.Data)
+                alert(JSON.stringify(e.response));
+            return;
+        }
+    }
+
+    function requestStart(e) {
+        if (e.type == "create") {
+
+        }
+    }
+
+
+
+    function onEdit(e) {
+
+
+        if (!e.model.isNew()) {
+            e.container.kendoWindow("title", "Edit");
+        }
+        else {
+
+            e.container.kendoWindow("title", "Add new");
+
+
+            var model = e.model;
+            var additionalLanguagesContainer = $("#additionalLanguagesContainer");
+            var addLanguageButton = $("#addLanguageButton");
+
+            addLanguageButton.click(function () {
+                // Create input elements for additional languages dynamically
+                var langCode = prompt("Enter Language Code (e.g., 'fr-FR'): ");
+                if (langCode) {
+                    // Check if a translation with the same language code already exists
+                    var existingTranslation = model.ClinincSpecialityTranslations.find(t => t.LangCode === langCode);
+                    if (existingTranslation) {
+                        alert("Language with the same code already exists.");
+                        return;
+                    }
+
+                    var langId = kendo.guid();
+                    var languageField =
+                        '<div class="k-edit-label">' +
+                        '<label for="additionalLanguageDescription">Description (' + langCode + ')</label>' +
+                        '</div>' +
+                        '<div class="k-edit-field">' +
+                        '<input type="text" class="k-input k-textbox" name="ClinincSpecialityTranslations[' + langId + '].Description" />' +
+                        '</div>';
+
+                    additionalLanguagesContainer.append(languageField);
+                }
+            });
+
+            //// Validation for mandatory Arabic and English descriptions
+            //model.bind("change", function (e) {
+            //    var arabicTranslation = model.ClinincSpecialityTranslations.find(t => t.LangCode === "ar");
+            //    var englishTranslation = model.ClinincSpecialityTranslations.find(t => t.LangCode === "en-US");
+
+            //    if (!arabicTranslation || !englishTranslation) {
+            //        e.preventDefault();
+            //        alert("Arabic and English translations are mandatory.");
+            //    }
+            //});
+        }
+    }
+
+    function returnFalse() {
+        return false;
+    }
+
+    function onDataBound(e) {
+        var grid = this;
+        grid.table.find("tr").each(function () {
+            var dataItem = grid.dataItem(this);
+
+            $(this).find('script').each(function () {
+                eval($(this).html());
+            });
+
+            kendo.bind($(this), dataItem);
+        });
+    }
+
+</script>
+
+<script id="Temp_Destroy" type="text/kendo-tmpl">
+    <span class="k-grid-delete" style="font-size:24px;cursor:pointer;color:rgb(45,61,77)"><i class="fa fa-trash"></i></span>
+</script>
+
+<script id="Temp_Edit" type="text/kendo-tmpl">
+    <span   style="font-size:24px;cursor:pointer;color:rgb(45,61,77)"><i class="fas fa-edit"></i></span>
+</script>
+
+<script>
+
+    function goEdit(e) {
+
+        dataItemPay = this.dataItem($(e.currentTarget).closest("tr"));
+        transferId = dataItemPay.Id;
+
+        var url = "/Admin/Employees/EditEmployee/" + transferId;
+
+        var a = document.createElement('a');
+        //a.target = "_blank";
+        a.href = url;
+        a.click();
+
+    }
+
+</script>

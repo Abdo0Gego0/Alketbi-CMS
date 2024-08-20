@@ -1,0 +1,137 @@
+﻿@page
+
+
+
+
+
+
+
+
+
+
+<style>
+
+.classSource
+{
+        direction: rtl;
+        background: #d9e2e7;
+        width: fit-content;
+        border-radius: 5px;
+        border-bottom-left-radius: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 15px;
+        margin-bottom:5px;
+}
+
+
+    .classDestionation {
+        direction: ltr;
+        display: flex;
+        justify-content: flex-end;
+        background: #d9e2e7;
+        width: fit-content;
+        border-radius: 5px;
+        border-bottom-right-radius: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+
+
+
+</style>
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row p-1">
+        <input type="text" class="w-100" id="clientIdInput" hidden />
+    </div>
+
+        <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList">
+                <li>أهلا بك في موقع الكتبي للسفريات بماذا يمكننا أن نساعدك؟</li>
+                <li>طيران</li>
+                <li>فنادق</li>
+                <li>شهر العسل</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row p-1">
+        <div class="col-1">Message</div>
+        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6 text-end">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+
+
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function generateClientId() {
+        // Replace this with your preferred method of generating a client ID
+        return Math.random().toString(36).substring(2, 36);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the cookie exists
+        var existingClientId = getCookie("clientId");
+
+        if (!existingClientId) {
+            // Generate a new client ID
+            var newClientId = generateClientId();
+
+            // Set the cookie
+            setCookie("clientId", newClientId);
+
+            // Set the value to a hidden input
+            var hiddenInput = document.getElementById("clientIdInput");
+            if (hiddenInput) {
+                // Set the value attribute
+                hiddenInput.value = newClientId;
+
+                // Trigger the change event (if needed)
+                var event = new Event('change');
+                hiddenInput.dispatchEvent(event);
+            }
+        }
+        else{
+            var hiddenInput = document.getElementById("clientIdInput");
+            hiddenInput.value = existingClientId;
+        }
+
+        
+
+    });
+</script>
+
